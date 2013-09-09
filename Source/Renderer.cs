@@ -156,10 +156,6 @@ namespace RenderBuddy
 
 		public void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
 		{
-			////update all the matrices of the camera before we start drawing
-			//_camera.BeginScene(false);
-			//_camera.TranslationMatrix * Resolution.TransformationMatrix()
-
 			SpriteBatch.Begin(SpriteSortMode.Deferred, //TODO: switch this to deferred sorting?
 				myBlendState, 
 				null,
