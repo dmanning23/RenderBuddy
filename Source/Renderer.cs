@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using CameraBuddy;
 
 namespace RenderBuddy
 {
@@ -31,6 +32,11 @@ namespace RenderBuddy
 
 		//sprite batch being used
 		public SpriteBatch SpriteBatch { get; private set; }
+
+		/// <summary>
+		/// The camera we are going to use!
+		/// </summary>
+		public Camera Camera { get; private set; }
 
 		#endregion //Member Variables
 
@@ -63,6 +69,10 @@ namespace RenderBuddy
 			//set up all the stuff
 			m_Graphics = null;
 			SpriteBatch = null;
+
+			//set up the camera
+			Camera = new Camera();
+			Camera.WorldBoundary = new Rectangle(-2000, -1000, 4000, 2000);
 		}
 
 		/// <summary>
@@ -88,6 +98,9 @@ namespace RenderBuddy
 			myBlendState.AlphaDestinationBlend = Blend.InverseSourceAlpha;
 			myBlendState.ColorDestinationBlend = Blend.InverseSourceAlpha;
 			m_Graphics.BlendState = myBlendState;
+
+			//Setup all the rectangles used by the camera
+			Camera.SetScreenRects(myGraphics.Viewport.Bounds, myGraphics.Viewport.TitleSafeArea);
 		}
 
 		/// <summary>
@@ -143,6 +156,10 @@ namespace RenderBuddy
 
 		public void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
 		{
+			////update all the matrices of the camera before we start drawing
+			//_camera.BeginScene(false);
+			//_camera.TranslationMatrix * Resolution.TransformationMatrix()
+
 			SpriteBatch.Begin(SpriteSortMode.Deferred, //TODO: switch this to deferred sorting?
 				myBlendState, 
 				null,
