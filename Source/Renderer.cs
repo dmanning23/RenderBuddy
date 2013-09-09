@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using CameraBuddy;
+using BasicPrimitiveBuddy;
 
 namespace RenderBuddy
 {
@@ -37,6 +38,12 @@ namespace RenderBuddy
 		/// The camera we are going to use!
 		/// </summary>
 		public Camera Camera { get; private set; }
+
+		/// <summary>
+		/// thing for rendering primitives.
+		/// </summary>
+		/// <value>The primitive.</value>
+		public BasicPrimitive Primitive { get; private set; }
 
 		#endregion //Member Variables
 
@@ -101,6 +108,8 @@ namespace RenderBuddy
 
 			//Setup all the rectangles used by the camera
 			Camera.SetScreenRects(myGraphics.Viewport.Bounds, myGraphics.Viewport.TitleSafeArea);
+
+			Primitive = new BasicPrimitive(myGraphics);
 		}
 
 		/// <summary>
