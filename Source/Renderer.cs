@@ -13,16 +13,6 @@ namespace RenderBuddy
 		#region Member Variables
 
 		/// <summary>
-		/// the title safe area of the game window
-		/// </summary>
-		private Rectangle m_TitleSafeArea;
-
-		/// <summary>
-		/// the whole game window
-		/// </summary>
-		private Rectangle m_ScreenRect;
-
-		/// <summary>
 		/// My own content manager, so images can be loaded separate from xml
 		/// </summary>
 		public ContentManager Content { get; private set; }
@@ -85,13 +75,11 @@ namespace RenderBuddy
 		/// <summary>
 		/// Reload all the graphics content
 		/// </summary>
-		public void LoadContent(GraphicsDevice myGraphics, Rectangle screenRect, Rectangle titleSafeRect)
+		public void LoadContent(GraphicsDevice myGraphics)
 		{
 			//grab all the member variables
 			Debug.Assert(null != myGraphics);
 			m_Graphics = myGraphics;
-			m_ScreenRect = screenRect;
-			m_TitleSafeArea = titleSafeRect;
 
 			SpriteBatch = new SpriteBatch(m_Graphics);
 
@@ -181,6 +169,12 @@ namespace RenderBuddy
 		public void SpriteBatchEnd()
 		{
 			SpriteBatch.End();
+		}
+
+		public void DrawCameraInfo()
+		{
+			//draw the center point
+			Primitive.Point(Camera.Origin, Color.Red, SpriteBatch);
 		}
 
 		#endregion
