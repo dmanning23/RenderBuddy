@@ -8,7 +8,7 @@ using BasicPrimitiveBuddy;
 
 namespace RenderBuddy
 {
-	public class Renderer
+	public class XNARenderer : IRenderer<Texture2D>
 	{
 		#region Member Variables
 
@@ -16,12 +16,21 @@ namespace RenderBuddy
 		/// My own content manager, so images can be loaded separate from xml
 		/// </summary>
 		public ContentManager Content { get; private set; }
-		private Game m_Game; //needed to initialize content manager
 
-		//the graphics card device manager
+		/// <summary>
+		/// needed to initialize content manager
+		/// </summary>
+		private Game m_Game;
+
+		/// <summary>
+		/// the graphics card device manager
+		/// </summary>
 		private GraphicsDevice m_Graphics;
 
-		//sprite batch being used
+		/// <summary>
+		/// sprite batch being used
+		/// </summary>
+		/// <value>The sprite batch.</value>
 		public SpriteBatch SpriteBatch { get; private set; }
 
 		/// <summary>
@@ -33,7 +42,7 @@ namespace RenderBuddy
 		/// thing for rendering primitives.
 		/// </summary>
 		/// <value>The primitive.</value>
-		public BasicPrimitive Primitive { get; private set; }
+		public IBasicPrimitive Primitive { get; private set; }
 
 		#endregion //Member Variables
 
@@ -52,7 +61,7 @@ namespace RenderBuddy
 		/// Hello, standard constructor!
 		/// </summary>
 		/// <param name="GameReference">Reference to the game engine</param>
-		public Renderer(Game GameReference)
+		public XNARenderer(Game GameReference)
 		{
 			//set up the content manager
 			Debug.Assert(null != GameReference);
@@ -97,7 +106,7 @@ namespace RenderBuddy
 			//Setup all the rectangles used by the camera
 			Camera.SetScreenRects(myGraphics.Viewport.Bounds, myGraphics.Viewport.TitleSafeArea);
 
-			Primitive = new BasicPrimitive(myGraphics);
+			Primitive = new XNABasicPrimitive(myGraphics, SpriteBatch);
 		}
 
 		/// <summary>
@@ -113,16 +122,10 @@ namespace RenderBuddy
 
 		#region Methods
 
-		public void Draw(
-			Texture2D iImageID,
-			Vector2 Position,
-			Color rColor, 
-			float fRotation,
-			bool bFlip,
-			float fScale)
+		public void Draw(Texture2D image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale)
 		{
 			SpriteBatch.Draw(
-				iImageID,
+				image,
 				Position,
 				null,
 				rColor,
@@ -133,15 +136,10 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public void Draw(
-			Texture2D iImageID,
-			Rectangle Destination,
-			Color rColor,
-			float fRotation,
-			bool bFlip)
+		public void Draw(Texture2D image, Rectangle Destination, Color rColor, float fRotation, bool bFlip)
 		{
 			SpriteBatch.Draw(
-				iImageID,
+				image,
 				Destination,
 				null,
 				rColor,
@@ -149,6 +147,11 @@ namespace RenderBuddy
 				Vector2.Zero,
 				(bFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None),
 				0.0f);
+		}
+
+		public Texture2D LoadImage(string file)
+		{
+			return Content.Load<Texture2D>(file);
 		}
 
 		public void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
@@ -174,7 +177,7 @@ namespace RenderBuddy
 		public void DrawCameraInfo()
 		{
 			//draw the center point
-			Primitive.Point(Camera.Origin, Color.Red, SpriteBatch);
+			Primitive.Point(Camera.Origin, Color.Red);
 		}
 
 		#endregion

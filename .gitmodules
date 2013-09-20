@@ -7,3 +7,6 @@
 [submodule "externals/GameTimer"]
 	path = externals/GameTimer
 	url = git@github.com:dmanning23/GameTimer.git
+[submodule "externals/BasicPrimitiveBuddy"]
+	path = externals/BasicPrimitiveBuddy
+	url = git@github.com:dmanning23/BasicPrimitiveBuddy.git
