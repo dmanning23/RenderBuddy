@@ -8,7 +8,7 @@ using BasicPrimitiveBuddy;
 
 namespace RenderBuddy
 {
-	public interface IRenderer<T>
+	public interface IRenderer
 	{
 		#region Properties
 
@@ -20,11 +20,11 @@ namespace RenderBuddy
 
 		#region Methods
 
-		void Draw(T image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale);
+		void Draw(ITexture image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale);
 
-		void Draw(T image, Rectangle Destination, Color rColor, float fRotation, bool bFlip);
+		void Draw(ITexture image, Rectangle Destination, Color rColor, float fRotation, bool bFlip);
 
-		T LoadImage(string file);
+		ITexture LoadImage(string file);
 
 		#endregion //Methods
 	}

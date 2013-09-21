@@ -8,7 +8,7 @@ using BasicPrimitiveBuddy;
 
 namespace RenderBuddy
 {
-	public class XNARenderer : IRenderer<Texture2D>
+	public class XNARenderer : IRenderer
 	{
 		#region Member Variables
 
@@ -122,10 +122,11 @@ namespace RenderBuddy
 
 		#region Methods
 
-		public void Draw(Texture2D image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale)
+		public void Draw(ITexture image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale)
 		{
+			XNATexture tex = image as XNATexture;
 			SpriteBatch.Draw(
-				image,
+				tex.Texture,
 				Position,
 				null,
 				rColor,
@@ -136,10 +137,11 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public void Draw(Texture2D image, Rectangle Destination, Color rColor, float fRotation, bool bFlip)
+		public void Draw(ITexture image, Rectangle Destination, Color rColor, float fRotation, bool bFlip)
 		{
+			XNATexture tex = image as XNATexture;
 			SpriteBatch.Draw(
-				image,
+				tex.Texture,
 				Destination,
 				null,
 				rColor,
@@ -149,9 +151,13 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public Texture2D LoadImage(string file)
+		public ITexture LoadImage(string file)
 		{
-			return Content.Load<Texture2D>(file);
+			XNATexture tex = new XNATexture()
+			{
+				Texture = Content.Load<Texture2D>(file)
+			};
+			return tex;
 		}
 
 		public void SpriteBatchBegin(BlendState myBlendState, Matrix translation)

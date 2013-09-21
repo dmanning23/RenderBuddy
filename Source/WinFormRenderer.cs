@@ -9,7 +9,7 @@ using BasicPrimitiveBuddy;
 
 namespace RenderBuddy
 {
-	public class WinFormRenderer : IRenderer<Image>
+	public class WinFormRenderer : IRenderer
 	{
 		#region Members
 
@@ -46,8 +46,12 @@ namespace RenderBuddy
 			m_Form = myForm;
 		}
 
-		public void Draw(Image image, Vector2 Position, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip, float fScale)
+		public void Draw(ITexture image, Vector2 Position, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip, float fScale)
 		{
+			//get the winform texture out of there
+			WinFormTexture tex = image as WinFormTexture;
+			Image myImage = tex.Texture;
+
 			//Get teh grpahics object
 			Graphics myGraphics = m_Form.CreateGraphics();
 
@@ -75,26 +79,26 @@ namespace RenderBuddy
 			if (bFlip)
 			{
 				//make a clone of the image and flip it... not very efficient, but this is tools anyways
-				image = (Image)image.Clone();
-				image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+				myImage = (Image)myImage.Clone();
+				myImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
 			}
 
 			myGraphics.Transform = TranslationMatrix;
 
 			// Draw image
-			myGraphics.DrawImage(image,
+			myGraphics.DrawImage(myImage,
 			                     Position.X,
 			                     Position.Y,
-			                     image.Width,
-			                     image.Height);
+			                     myImage.Width,
+			                     myImage.Height);
 		}
 
-		public void Draw(Image image, Microsoft.Xna.Framework.Rectangle Destination,  Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip)
+		public void Draw(ITexture image, Microsoft.Xna.Framework.Rectangle Destination,  Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip)
 		{
 			//TODO: draw from a rectangle?
 		}
 
-		public Image LoadImage(string file)
+		public ITexture LoadImage(string file)
 		{
 			if (File.Exists(file))
 			{
@@ -102,10 +106,13 @@ namespace RenderBuddy
 			}
 
 			//Create the bitmap object, load from file
-			Image myBitmap = Bitmap.FromFile(file);
+			WinFormTexture tex = new WinFormTexture()
+			{
+				Texture = Bitmap.FromFile(file)
+			};
 
 			//TODO: embed a "flip" property?
-			return myBitmap;
+			return tex;
 		}
 
 		#endregion

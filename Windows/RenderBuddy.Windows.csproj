@@ -50,6 +50,15 @@
     <Compile Include="..\Source\WinFormRenderer.cs">
       <Link>WinFormRenderer.cs</Link>
     </Compile>
+    <Compile Include="..\Source\ITexture.cs">
+      <Link>ITexture.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\WinFormTexture.cs">
+      <Link>WinFormTexture.cs</Link>
+    </Compile>
+    <Compile Include="..\Source\XnaTexture.cs">
+      <Link>XnaTexture.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\" />
