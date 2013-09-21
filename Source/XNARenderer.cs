@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using CameraBuddy;
 using BasicPrimitiveBuddy;
+using FilenameBuddy;
 
 namespace RenderBuddy
 {
@@ -153,10 +154,13 @@ namespace RenderBuddy
 
 		public ITexture LoadImage(string file)
 		{
+			Filename filename = new Filename();
+			filename.SetRelFilename(file);
 			XNATexture tex = new XNATexture()
 			{
-				Texture = Content.Load<Texture2D>(file)
+				Texture = Content.Load<Texture2D>(filename.GetRelPathFileNoExt())
 			};
+
 			return tex;
 		}
 
