@@ -10,3 +10,6 @@
 [submodule "externals/BasicPrimitiveBuddy"]
 	path = externals/BasicPrimitiveBuddy
 	url = git@github.com:dmanning23/BasicPrimitiveBuddy.git
+[submodule "externals/Filename"]
+	path = externals/Filename
+	url = git@github.com:dmanning23/Filename.git
