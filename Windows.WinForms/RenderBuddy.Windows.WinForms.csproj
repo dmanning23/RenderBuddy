@@ -109,19 +109,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\externals\BasicPrimitiveBuddy\Windows.WinForms\BasicPrimitiveBuddy.Windows.WinForms.csproj">
+    <ProjectReference Include="..\..\BasicPrimitiveBuddy\Windows.WinForms\BasicPrimitiveBuddy.Windows.WinForms.csproj">
       <Project>{28A47E65-101E-4F9A-93FD-F07B09556D77}</Project>
       <Name>BasicPrimitiveBuddy.Windows.WinForms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\externals\CameraBuddy\Windows.XNA\CameraBuddy.Windows.XNA.csproj">
+    <ProjectReference Include="..\..\CameraBuddy\Windows.XNA\CameraBuddy.Windows.XNA.csproj">
       <Project>{DEC8972E-F426-43C9-AAE7-6F50F4C376D1}</Project>
       <Name>CameraBuddy.Windows.XNA</Name>
     </ProjectReference>
-    <ProjectReference Include="..\externals\Filename\Windows\Filename.Windows.csproj">
+    <ProjectReference Include="..\..\Filename\Windows\Filename.Windows.csproj">
       <Project>{2A84DFE8-75E0-4774-BAAF-00629ED44405}</Project>
       <Name>Filename.Windows</Name>
     </ProjectReference>
-    <ProjectReference Include="..\externals\GameTimer\Windows.XNA\GameTimer.Windows.XNA.csproj">
+    <ProjectReference Include="..\..\GameTimer\Windows.XNA\GameTimer.Windows.XNA.csproj">
       <Project>{C05AFDF0-1371-48FA-AD30-CF14D46EAF2B}</Project>
       <Name>GameTimer.Windows.XNA</Name>
     </ProjectReference>
