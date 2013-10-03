@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0ADDFB2B-6547-46D0-91DD-7D2A863DC88E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RenderBuddy.Tests</RootNamespace>
+    <AssemblyName>RenderBuddy.Tests</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Test.cs" />
+    <Compile Include="TestRenderer.cs" />
+    <Compile Include="TestTexture.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Windows\RenderBuddy.Windows.csproj">
+      <Project>{5C9D6145-A763-4B79-8541-0C44C6DEE72D}</Project>
+      <Name>RenderBuddy.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\MonoGame\ThirdParty\Lidgren.Network\Lidgren.Network.Windows.csproj">
+      <Project>{AE483C29-042E-4226-BA52-D247CE7676DA}</Project>
+      <Name>Lidgren.Network.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\MonoGame\MonoGame.Framework\MonoGame.Framework.WindowsGL.csproj">
+      <Project>{7DE47032-A904-4C29-BD22-2D235E8D91BA}</Project>
+      <Name>MonoGame.Framework.WindowsGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\CameraBuddy\Windows\CameraBuddy.Windows.csproj">
+      <Project>{5320A521-E249-4027-A241-F91E79020EE2}</Project>
+      <Name>CameraBuddy.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\externals\BasicPrimitiveBuddy\Windows\BasicPrimitiveBuddy.Windows.csproj">
+      <Project>{0FAA1286-7BFA-4765-8B51-62E438CB121D}</Project>
+      <Name>BasicPrimitiveBuddy.Windows</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
