@@ -14,7 +14,8 @@ namespace RenderBuddy.Tests
 		{
 			get
 			{
-				return 256;
+				//width of cortchfront.png
+				return 129;
 			}
 		}
 
@@ -22,7 +23,8 @@ namespace RenderBuddy.Tests
 		{
 			get
 			{
-				return 256;
+				//height of cortchfront.png
+				return 116;
 			}
 		}
 		
