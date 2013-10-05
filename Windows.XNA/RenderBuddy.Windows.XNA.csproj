@@ -76,6 +76,8 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -105,6 +107,12 @@
       <Link>XnaTexture.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+	<Compile Include="..\Source\WinFormRenderer.cs">
+      <Link>WinFormRenderer.cs</Link>
+    </Compile>
+	<Compile Include="..\Source\WinFormTexture.cs">
+      <Link>WinFormTexture.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BasicPrimitiveBuddy\Windows.XNA\BasicPrimitiveBuddy.Windows.XNA.csproj">
