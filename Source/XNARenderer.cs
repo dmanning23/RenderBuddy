@@ -165,7 +165,7 @@ namespace RenderBuddy
 
 		public void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
 		{
-			SpriteBatch.Begin(SpriteSortMode.Deferred, //TODO: check difference between immediate and deferred, take it in as paramter
+			SpriteBatch.Begin(SpriteSortMode.Immediate, //TODO: check difference between immediate and deferred, take it in as paramter
 			                  //prolly need immediate for models, deferred for particles.
 				myBlendState, 
 				null,
