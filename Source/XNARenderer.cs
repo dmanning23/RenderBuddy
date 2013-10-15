@@ -154,7 +154,7 @@ namespace RenderBuddy
 
 		public ITexture LoadImage(string file)
 		{
-			Filename filename = new Filename(file);
+			Filename filename = new Filename { File = file };
 			XNATexture tex = new XNATexture()
 			{
 				Texture = Content.Load<Texture2D>(filename.GetRelPathFileNoExt())
