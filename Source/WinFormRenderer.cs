@@ -1,11 +1,10 @@
-using System.Collections.Generic;
+using BasicPrimitiveBuddy;
+using CameraBuddy;
+using Microsoft.Xna.Framework;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using Microsoft.Xna.Framework;
-using CameraBuddy;
-using BasicPrimitiveBuddy;
 
 namespace RenderBuddy
 {
