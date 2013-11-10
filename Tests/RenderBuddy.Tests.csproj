@@ -42,7 +42,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\BasicPrimitiveBuddy\Windows\BasicPrimitiveBuddy.Windows.csproj">
-      <Project>{0faa1286-7bfa-4765-8b51-62e438cb121d}</Project>
+      <Project>{0FAA1286-7BFA-4765-8B51-62E438CB121D}</Project>
       <Name>BasicPrimitiveBuddy.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\MonoGame\ThirdParty\Lidgren.Network\Lidgren.Network.Windows.csproj">
@@ -58,7 +58,7 @@
       <Name>CameraBuddy.Windows</Name>
     </ProjectReference>
     <ProjectReference Include="..\Windows\RenderBuddy.Windows.csproj">
-      <Project>{5c9d6145-a763-4b79-8541-0c44c6dee72d}</Project>
+      <Project>{5C9D6145-A763-4B79-8541-0C44C6DEE72D}</Project>
       <Name>RenderBuddy.Windows</Name>
     </ProjectReference>
   </ItemGroup>
