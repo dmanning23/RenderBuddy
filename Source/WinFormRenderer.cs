@@ -1,6 +1,7 @@
 using BasicPrimitiveBuddy;
 using CameraBuddy;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace RenderBuddy
 {
-	public class WinFormRenderer : IRenderer
+	public class WinFormRenderer : RendererBase
 	{
 		#region Members
 
@@ -16,21 +17,6 @@ namespace RenderBuddy
 		/// the form that this dude will render to
 		/// </summary>
 		public Form m_Form;
-
-		#endregion
-
-		#region Properties
-
-		/// <summary>
-		/// The camera we are going to use!
-		/// </summary>
-		public Camera Camera { get; private set; }
-
-		/// <summary>
-		/// thing for rendering primitives.
-		/// </summary>
-		/// <value>The primitive.</value>
-		public IBasicPrimitive Primitive { get; private set; }
 
 		#endregion
 
@@ -43,9 +29,11 @@ namespace RenderBuddy
 		{
 			Debug.Assert(null != myForm);
 			m_Form = myForm;
+
+			Primitive = new WinFormBasicPrimitive(m_Form);
 		}
 
-		public void Draw(ITexture image, Vector2 Position, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip, float fScale)
+		public override void Draw(ITexture image, Vector2 Position, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip, float fScale)
 		{
 			//get the winform texture out of there
 			WinFormTexture tex = image as WinFormTexture;
@@ -92,12 +80,12 @@ namespace RenderBuddy
 			                     myImage.Height);
 		}
 
-		public void Draw(ITexture image, Microsoft.Xna.Framework.Rectangle Destination,  Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip)
+		public override void Draw(ITexture image, Microsoft.Xna.Framework.Rectangle Destination, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip)
 		{
 			//TODO: draw from a rectangle?
 		}
 
-		public ITexture LoadImage(string file)
+		public override ITexture LoadImage(string file)
 		{
 			if (File.Exists(file))
 			{

@@ -8,14 +8,9 @@ using System.Diagnostics;
 
 namespace RenderBuddy
 {
-	public class XNARenderer : IRenderer
+	public class XNARenderer : RendererBase
 	{
 		#region Member Variables
-
-		/// <summary>
-		/// My own content manager, so images can be loaded separate from xml
-		/// </summary>
-		public ContentManager Content { get; private set; }
 
 		/// <summary>
 		/// needed to initialize content manager
@@ -32,17 +27,6 @@ namespace RenderBuddy
 		/// </summary>
 		/// <value>The sprite batch.</value>
 		public SpriteBatch SpriteBatch { get; private set; }
-
-		/// <summary>
-		/// The camera we are going to use!
-		/// </summary>
-		public Camera Camera { get; private set; }
-
-		/// <summary>
-		/// thing for rendering primitives.
-		/// </summary>
-		/// <value>The primitive.</value>
-		public IBasicPrimitive Primitive { get; private set; }
 
 		#endregion //Member Variables
 
@@ -75,10 +59,6 @@ namespace RenderBuddy
 			//set up all the stuff
 			m_Graphics = null;
 			SpriteBatch = null;
-
-			//set up the camera
-			Camera = new Camera();
-			Camera.WorldBoundary = new Rectangle(-2000, -1000, 4000, 2000);
 		}
 
 		/// <summary>
@@ -122,7 +102,7 @@ namespace RenderBuddy
 
 		#region Methods
 
-		public void Draw(ITexture image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale)
+		public override void Draw(ITexture image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale)
 		{
 			XNATexture tex = image as XNATexture;
 			SpriteBatch.Draw(
@@ -137,7 +117,7 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public void Draw(ITexture image, Rectangle Destination, Color rColor, float fRotation, bool bFlip)
+		public override void Draw(ITexture image, Rectangle Destination, Color rColor, float fRotation, bool bFlip)
 		{
 			XNATexture tex = image as XNATexture;
 			SpriteBatch.Draw(
@@ -151,7 +131,7 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public ITexture LoadImage(string file)
+		public override ITexture LoadImage(string file)
 		{
 			Filename filename = new Filename { File = file };
 			XNATexture tex = new XNATexture()
@@ -162,7 +142,7 @@ namespace RenderBuddy
 			return tex;
 		}
 
-		public void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
+		public override void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
 		{
 			SpriteBatch.Begin(SpriteSortMode.Immediate, //TODO: check difference between immediate and deferred, take it in as paramter
 			                  //prolly need immediate for models, deferred for particles.
@@ -178,15 +158,9 @@ namespace RenderBuddy
 		/// 
 		/// </summary>
 		/// <param name=""></param>
-		public void SpriteBatchEnd()
+		public override void SpriteBatchEnd()
 		{
 			SpriteBatch.End();
-		}
-
-		public void DrawCameraInfo()
-		{
-			//draw the center point
-			Primitive.Point(Camera.Origin, Color.Red);
 		}
 
 		#endregion
