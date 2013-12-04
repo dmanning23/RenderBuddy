@@ -87,7 +87,7 @@ namespace RenderBuddy
 
 		public override ITexture LoadImage(string file)
 		{
-			if (File.Exists(file))
+			if (!File.Exists(file))
 			{
 				return null;
 			}
