@@ -1,6 +1,7 @@
 using BasicPrimitiveBuddy;
 using CameraBuddy;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
 namespace RenderBuddy
@@ -29,6 +30,19 @@ namespace RenderBuddy
 		ITexture LoadImage(string file);
 
 		void DrawCameraInfo();
+
+		/// <summary>
+		/// called at the start of the draw loop
+		/// </summary>
+		/// <param name="myBlendState"></param>
+		/// <param name="translation"></param>
+		void SpriteBatchBegin(BlendState myBlendState, Matrix translation);
+
+		/// <summary>
+		/// called at the end of the draw loop
+		/// </summary>
+		/// <param name=""></param>
+		void SpriteBatchEnd();
 
 		#endregion //Methods
 	}
