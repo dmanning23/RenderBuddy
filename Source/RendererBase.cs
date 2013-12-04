@@ -42,6 +42,13 @@ namespace RenderBuddy
 			Camera.WorldBoundary = new Rectangle(-2000, -1000, 4000, 2000);
 		}
 
+		/// <summary>
+		/// Unload all the graphics content
+		/// </summary>
+		public virtual void UnloadGraphicsContent()
+		{
+		}
+
 		#endregion
 
 		#region Methods

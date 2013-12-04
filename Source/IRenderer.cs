@@ -32,6 +32,11 @@ namespace RenderBuddy
 		void DrawCameraInfo();
 
 		/// <summary>
+		/// Unload all the graphics content
+		/// </summary>
+		void UnloadGraphicsContent();
+
+		/// <summary>
 		/// called at the start of the draw loop
 		/// </summary>
 		/// <param name="myBlendState"></param>

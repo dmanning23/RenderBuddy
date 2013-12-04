@@ -100,6 +100,9 @@
     <Compile Include="..\Source\ITexture.cs">
       <Link>ITexture.cs</Link>
     </Compile>
+    <Compile Include="..\Source\RendererBase.cs">
+      <Link>RendererBase.cs</Link>
+    </Compile>
     <Compile Include="..\Source\XNARenderer.cs">
       <Link>XNARenderer.cs</Link>
     </Compile>
@@ -107,10 +110,10 @@
       <Link>XnaTexture.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-	<Compile Include="..\Source\WinFormRenderer.cs">
+    <Compile Include="..\Source\WinFormRenderer.cs">
       <Link>WinFormRenderer.cs</Link>
     </Compile>
-	<Compile Include="..\Source\WinFormTexture.cs">
+    <Compile Include="..\Source\WinFormTexture.cs">
       <Link>WinFormTexture.cs</Link>
     </Compile>
   </ItemGroup>

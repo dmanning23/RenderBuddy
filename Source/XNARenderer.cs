@@ -92,7 +92,7 @@ namespace RenderBuddy
 		/// <summary>
 		/// Unload all the graphics content
 		/// </summary>
-		public void UnloadGraphicsContent()
+		public override void UnloadGraphicsContent()
 		{
 			//unload the bitmaps
 			Content.Unload();
