@@ -63,10 +63,6 @@ namespace RenderBuddy
 		{
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name=""></param>
 		public virtual void SpriteBatchEnd()
 		{
 		}
