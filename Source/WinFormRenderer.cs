@@ -1,4 +1,5 @@
 using BasicPrimitiveBuddy;
+using System;
 using CameraBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -108,54 +109,73 @@ namespace RenderBuddy
 
 		public override void Draw(ITexture image, Vector2 Position, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip, float fScale)
 		{
-			//get the winform texture out of there
-			WinFormTexture tex = image as WinFormTexture;
-			Image myImage = tex.Texture;
-
-			//Get teh grpahics object
-			Debug.Assert(null != m_DoubleBuffer);
-
-			//setup the scale matrix
-			System.Drawing.Drawing2D.Matrix ScaleMatrix = new System.Drawing.Drawing2D.Matrix();
-			ScaleMatrix.Scale(fScale, fScale);
-
-			//setup the rotation matrix
-			System.Drawing.Drawing2D.Matrix RotationMatrix = new System.Drawing.Drawing2D.Matrix();
-			RotationMatrix.Rotate(MathHelper.ToDegrees(fRotation));
-
-			//setup the translation matrix
-			System.Drawing.Drawing2D.Matrix TranslationMatrix = new System.Drawing.Drawing2D.Matrix();
-			TranslationMatrix.Translate(Position.X, Position.Y);
-
-			//setup the "move back from origin" matrix
-			System.Drawing.Drawing2D.Matrix OriginMatrix = new System.Drawing.Drawing2D.Matrix();
-			OriginMatrix.Translate(-Position.X, -Position.Y);
-
-			TranslationMatrix.Multiply(RotationMatrix);
-			TranslationMatrix.Multiply(ScaleMatrix);
-			TranslationMatrix.Multiply(OriginMatrix);
-
-			//take bFlip into account?
-			if (bFlip)
+			try
 			{
-				//make a clone of the image and flip it... not very efficient, but this is tools anyways
-				myImage = (Image)myImage.Clone();
-				myImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+				//get the winform texture out of there
+				WinFormTexture tex = image as WinFormTexture;
+				Image myImage = tex.Texture;
+
+				//Get teh grpahics object
+				Debug.Assert(null != m_DoubleBuffer);
+
+				//setup the scale matrix
+				System.Drawing.Drawing2D.Matrix ScaleMatrix = new System.Drawing.Drawing2D.Matrix();
+				ScaleMatrix.Scale(fScale, fScale);
+
+				//setup the rotation matrix
+				System.Drawing.Drawing2D.Matrix RotationMatrix = new System.Drawing.Drawing2D.Matrix();
+				RotationMatrix.Rotate(MathHelper.ToDegrees(fRotation));
+
+				//setup the translation matrix
+				System.Drawing.Drawing2D.Matrix TranslationMatrix = new System.Drawing.Drawing2D.Matrix();
+				TranslationMatrix.Translate(Position.X, Position.Y);
+
+				//setup the "move back from origin" matrix
+				System.Drawing.Drawing2D.Matrix OriginMatrix = new System.Drawing.Drawing2D.Matrix();
+				OriginMatrix.Translate(-Position.X, -Position.Y);
+
+				TranslationMatrix.Multiply(RotationMatrix);
+				TranslationMatrix.Multiply(ScaleMatrix);
+				TranslationMatrix.Multiply(OriginMatrix);
+
+				//take bFlip into account?
+				if (bFlip)
+				{
+					//make a clone of the image and flip it... not very efficient, but this is tools anyways
+					myImage = (Image)myImage.Clone();
+					myImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+				}
+
+				m_DoubleBuffer.Graphics.Transform = TranslationMatrix;
+
+				// Draw image
+				m_DoubleBuffer.Graphics.DrawImage(myImage,
+									 Position.X,
+									 Position.Y,
+									 myImage.Width,
+									 myImage.Height);
 			}
-
-			m_DoubleBuffer.Graphics.Transform = TranslationMatrix;
-
-			// Draw image
-			m_DoubleBuffer.Graphics.DrawImage(myImage,
-			                     Position.X,
-			                     Position.Y,
-			                     myImage.Width,
-			                     myImage.Height);
+			catch (Exception ex)
+			{
+				//wtf do someinh
+				MessageBox.Show(ex.ToString());
+			}
 		}
 
 		public override void Draw(ITexture image, Microsoft.Xna.Framework.Rectangle Destination, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip)
 		{
-			//TODO: draw from a rectangle?
+			//get the image size
+			float scale = (float)Destination.Width / (float)image.Width;
+
+			//this gets screwed up casting from int to float
+			if (scale <= 0.0f)
+			{
+				return;
+			}
+
+			//get a postion
+			Vector2 pos = new Vector2(Destination.X, Destination.Y);
+			Draw(image, pos, rColor, fRotation, bFlip, scale);
 		}
 
 		#endregion
