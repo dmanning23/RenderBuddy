@@ -83,9 +83,6 @@ namespace RenderBuddy
 			myBlendState.ColorDestinationBlend = Blend.InverseSourceAlpha;
 			m_Graphics.BlendState = myBlendState;
 
-			//Setup all the rectangles used by the camera
-			Camera.SetScreenRects(myGraphics.Viewport.Bounds, myGraphics.Viewport.TitleSafeArea);
-
 			Primitive = new XNABasicPrimitive(myGraphics, SpriteBatch);
 		}
 
