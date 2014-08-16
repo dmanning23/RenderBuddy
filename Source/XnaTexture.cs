@@ -28,5 +28,18 @@ namespace RenderBuddy
 		}
 
 		#endregion //Properties
+
+		#region Methods
+
+		public XNATexture()
+		{
+		}
+
+		public XNATexture(Texture2D tex)
+		{
+			Texture = tex;
+		}
+
+		#endregion Methods
 	}
 }
