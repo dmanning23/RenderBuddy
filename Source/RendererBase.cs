@@ -1,10 +1,8 @@
 using BasicPrimitiveBuddy;
 using CameraBuddy;
-using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System.Diagnostics;
 
 namespace RenderBuddy
 {

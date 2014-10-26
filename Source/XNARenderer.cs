@@ -1,5 +1,4 @@
 using BasicPrimitiveBuddy;
-using CameraBuddy;
 using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
