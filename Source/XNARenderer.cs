@@ -138,14 +138,18 @@ namespace RenderBuddy
 			return tex;
 		}
 
-		public override void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
+		public override void SpriteBatchBegin(BlendState blendState, Matrix translation)
 		{
-			SpriteBatch.Begin(SpriteSortMode.Immediate, //TODO: check difference between immediate and deferred, take it in as paramter
-			                  //prolly need immediate for models, deferred for particles.
-				myBlendState, 
+			SpriteBatchBegin(SpriteSortMode.Immediate, blendState, translation);
+		}
+
+		public override void SpriteBatchBegin(SpriteSortMode sortmode, BlendState blendState, Matrix translation)
+		{
+			SpriteBatch.Begin(sortmode,
+				blendState,
 				null,
 				null,
-				RasterizerState.CullNone, 
+				RasterizerState.CullNone,
 				null,
 				translation);
 		}

@@ -57,7 +57,11 @@ namespace RenderBuddy
 
 		public abstract ITexture LoadImage(string file);
 
-		public virtual void SpriteBatchBegin(BlendState myBlendState, Matrix translation)
+		public virtual void SpriteBatchBegin(BlendState blendState, Matrix translation)
+		{
+		}
+
+		public virtual void SpriteBatchBegin(SpriteSortMode sortMode, BlendState blendState, Matrix translation)
 		{
 		}
 
