@@ -127,12 +127,11 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public override ITexture LoadImage(string file)
+		public override ITexture LoadImage(Filename file)
 		{
-			Filename filename = new Filename { File = file };
 			XNATexture tex = new XNATexture()
 			{
-				Texture = Content.Load<Texture2D>(filename.GetRelPathFileNoExt())
+				Texture = Content.Load<Texture2D>(file.GetRelPathFileNoExt())
 			};
 
 			return tex;

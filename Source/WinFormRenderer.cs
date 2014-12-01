@@ -1,6 +1,7 @@
 using BasicPrimitiveBuddy;
 using System;
 using CameraBuddy;
+using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
@@ -49,9 +50,9 @@ namespace RenderBuddy
 		/// </summary>
 		/// <param name="strBitmapFile">name of the bitmap to load</param>
 		/// <returns>ID of the bitmap</returns>
-		public override ITexture LoadImage(string file)
+		public override ITexture LoadImage(Filename file)
 		{
-			if (!File.Exists(file))
+			if (!File.Exists(file.File))
 			{
 				return null;
 			}
@@ -59,7 +60,7 @@ namespace RenderBuddy
 			//Create the bitmap object, load from file
 			WinFormTexture tex = new WinFormTexture()
 			{
-				Texture = Bitmap.FromFile(file)
+				Texture = Bitmap.FromFile(file.File)
 			};
 
 			//return the index it was stored at

@@ -1,5 +1,6 @@
 using BasicPrimitiveBuddy;
 using CameraBuddy;
+using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
@@ -27,7 +28,7 @@ namespace RenderBuddy
 
 		void Draw(ITexture image, Rectangle Destination, Color rColor, float fRotation, bool bFlip);
 
-		ITexture LoadImage(string file);
+		ITexture LoadImage(Filename file);
 
 		void DrawCameraInfo();
 
