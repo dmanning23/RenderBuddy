@@ -82,7 +82,7 @@ namespace RenderBuddy
 			myBlendState.ColorDestinationBlend = Blend.InverseSourceAlpha;
 			m_Graphics.BlendState = myBlendState;
 
-			Primitive = new XNABasicPrimitive(myGraphics, SpriteBatch);
+			Primitive = new XnaBasicPrimitive(myGraphics, SpriteBatch);
 		}
 
 		/// <summary>
