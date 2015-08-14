@@ -2,8 +2,8 @@ using BasicPrimitiveBuddy;
 using CameraBuddy;
 using FilenameBuddy;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RenderBuddy
 {
@@ -24,11 +24,11 @@ namespace RenderBuddy
 
 		#region Methods
 
-		void Draw(ITexture image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale);
+		void Draw(ITexture image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale);
 
-		void Draw(ITexture image, Rectangle Destination, Color rColor, float fRotation, bool bFlip);
+		void Draw(ITexture image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped);
 
-		ITexture LoadImage(Filename file);
+		ITexture LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null);
 
 		void DrawCameraInfo();
 
@@ -40,9 +40,9 @@ namespace RenderBuddy
 		/// <summary>
 		/// called at the start of the draw loop
 		/// </summary>
-		/// <param name="myBlendState"></param>
+		/// <param name="blendState"></param>
 		/// <param name="translation"></param>
-		void SpriteBatchBegin(BlendState myBlendState, Matrix translation);
+		void SpriteBatchBegin(BlendState blendState, Matrix translation);
 
 		/// <summary>
 		/// called at the end of the draw loop

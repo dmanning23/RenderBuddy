@@ -34,11 +34,13 @@ namespace RenderBuddy
 		/// <summary>
 		/// Hello, standard constructor!
 		/// </summary>
-		public RendererBase()
+		protected RendererBase()
 		{
 			//set up the camera
-			Camera = new Camera();
-			Camera.WorldBoundary = new Rectangle(-2000, -1000, 4000, 2000);
+			Camera = new Camera()
+			{
+				WorldBoundary = new Rectangle(-2000, -1000, 4000, 2000)
+			};
 		}
 
 		/// <summary>
@@ -52,11 +54,13 @@ namespace RenderBuddy
 
 		#region Methods
 
-		public abstract void Draw(ITexture image, Vector2 Position, Color rColor, float fRotation, bool bFlip, float fScale);
+		public abstract void Draw(ITexture image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation,
+			bool isFlipped, float scale);
 
-		public abstract void Draw(ITexture image, Rectangle Destination, Color rColor, float fRotation, bool bFlip);
+		public abstract void Draw(ITexture image, Rectangle destination, Color primaryColor, Color secondaryColor,
+			float rotation, bool isFlipped);
 
-		public abstract ITexture LoadImage(Filename file);
+		public abstract ITexture LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null);
 
 		public virtual void SpriteBatchBegin(BlendState blendState, Matrix translation)
 		{

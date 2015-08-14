@@ -1,10 +1,8 @@
 using BasicPrimitiveBuddy;
-using System;
-using CameraBuddy;
 using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -14,7 +12,7 @@ namespace RenderBuddy
 {
 	public class WinFormRenderer : RendererBase
 	{
-		#region Members
+		#region Fields
 
 		/// <summary>
 		/// the form that this dude will render to
@@ -24,7 +22,7 @@ namespace RenderBuddy
 		private BufferedGraphicsContext m_CurrentContext;
 		private BufferedGraphics m_DoubleBuffer;
 
-		#endregion
+		#endregion //Fields
 
 		#region Methods
 
@@ -48,11 +46,9 @@ namespace RenderBuddy
 		/// <summary>
 		/// Load a bitmap into the system
 		/// </summary>
-		/// <param name="strBitmapFile">name of the bitmap to load</param>
-		/// <returns>ID of the bitmap</returns>
-		public override ITexture LoadImage(Filename file)
+		public override ITexture LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
 		{
-			if (!File.Exists(file.File))
+			if (!File.Exists(textureFile.File))
 			{
 				return null;
 			}
@@ -60,7 +56,7 @@ namespace RenderBuddy
 			//Create the bitmap object, load from file
 			WinFormTexture tex = new WinFormTexture()
 			{
-				Texture = Bitmap.FromFile(file.File)
+				Texture = Bitmap.FromFile(textureFile.File)
 			};
 
 			//return the index it was stored at
@@ -108,7 +104,7 @@ namespace RenderBuddy
 			m_DoubleBuffer = null;
 		}
 
-		public override void Draw(ITexture image, Vector2 Position, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip, float fScale)
+		public override void Draw(ITexture image, Vector2 position, Microsoft.Xna.Framework.Color primaryColor, Microsoft.Xna.Framework.Color secondaryColor, float rotation, bool isFlipped, float scale)
 		{
 			try
 			{
@@ -120,39 +116,39 @@ namespace RenderBuddy
 				Debug.Assert(null != m_DoubleBuffer);
 
 				//setup the scale matrix
-				System.Drawing.Drawing2D.Matrix ScaleMatrix = new System.Drawing.Drawing2D.Matrix();
-				ScaleMatrix.Scale(fScale, fScale);
+				System.Drawing.Drawing2D.Matrix scaleMatrix = new System.Drawing.Drawing2D.Matrix();
+				scaleMatrix.Scale(scale, scale);
 
 				//setup the rotation matrix
-				System.Drawing.Drawing2D.Matrix RotationMatrix = new System.Drawing.Drawing2D.Matrix();
-				RotationMatrix.Rotate(MathHelper.ToDegrees(fRotation));
+				System.Drawing.Drawing2D.Matrix rotationMatrix = new System.Drawing.Drawing2D.Matrix();
+				rotationMatrix.Rotate(MathHelper.ToDegrees(rotation));
 
 				//setup the translation matrix
-				System.Drawing.Drawing2D.Matrix TranslationMatrix = new System.Drawing.Drawing2D.Matrix();
-				TranslationMatrix.Translate(Position.X, Position.Y);
+				System.Drawing.Drawing2D.Matrix translationMatrix = new System.Drawing.Drawing2D.Matrix();
+				translationMatrix.Translate(position.X, position.Y);
 
 				//setup the "move back from origin" matrix
-				System.Drawing.Drawing2D.Matrix OriginMatrix = new System.Drawing.Drawing2D.Matrix();
-				OriginMatrix.Translate(-Position.X, -Position.Y);
+				System.Drawing.Drawing2D.Matrix originMatrix = new System.Drawing.Drawing2D.Matrix();
+				originMatrix.Translate(-position.X, -position.Y);
 
-				TranslationMatrix.Multiply(RotationMatrix);
-				TranslationMatrix.Multiply(ScaleMatrix);
-				TranslationMatrix.Multiply(OriginMatrix);
+				translationMatrix.Multiply(rotationMatrix);
+				translationMatrix.Multiply(scaleMatrix);
+				translationMatrix.Multiply(originMatrix);
 
 				//take bFlip into account?
-				if (bFlip)
+				if (isFlipped)
 				{
 					//make a clone of the image and flip it... not very efficient, but this is tools anyways
 					myImage = (Image)myImage.Clone();
 					myImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
 				}
 
-				m_DoubleBuffer.Graphics.Transform = TranslationMatrix;
+				m_DoubleBuffer.Graphics.Transform = translationMatrix;
 
 				// Draw image
 				m_DoubleBuffer.Graphics.DrawImage(myImage,
-									 Position.X,
-									 Position.Y,
+									 position.X,
+									 position.Y,
 									 myImage.Width,
 									 myImage.Height);
 			}
@@ -163,10 +159,10 @@ namespace RenderBuddy
 			}
 		}
 
-		public override void Draw(ITexture image, Microsoft.Xna.Framework.Rectangle Destination, Microsoft.Xna.Framework.Color rColor, float fRotation, bool bFlip)
+		public override void Draw(ITexture image, Microsoft.Xna.Framework.Rectangle destination, Microsoft.Xna.Framework.Color primaryColor, Microsoft.Xna.Framework.Color secondaryColor, float rotation, bool isFlipped)
 		{
 			//get the image size
-			float scale = (float)Destination.Width / (float)image.Width;
+			float scale = (float)destination.Width / (float)image.Width;
 
 			//this gets screwed up casting from int to float
 			if (scale <= 0.0f)
@@ -175,10 +171,10 @@ namespace RenderBuddy
 			}
 
 			//get a postion
-			Vector2 pos = new Vector2(Destination.X, Destination.Y);
-			Draw(image, pos, rColor, fRotation, bFlip, scale);
+			Vector2 pos = new Vector2(destination.X, destination.Y);
+			Draw(image, pos, primaryColor, secondaryColor, rotation, isFlipped, scale);
 		}
 
-		#endregion
+		#endregion //Methods
 	}
 }

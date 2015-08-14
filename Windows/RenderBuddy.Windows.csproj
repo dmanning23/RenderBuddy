@@ -88,12 +88,12 @@
     <Compile Include="..\Source\RendererBase.cs">
       <Link>RendererBase.cs</Link>
     </Compile>
+    <Compile Include="..\Source\XnaRenderer.cs">
+      <Link>XnaRenderer.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\Source\IRenderer.cs">
       <Link>IRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\Source\XNARenderer.cs">
-      <Link>XNARenderer.cs</Link>
     </Compile>
     <Compile Include="..\Source\WinFormRenderer.cs">
       <Link>WinFormRenderer.cs</Link>
@@ -108,9 +108,7 @@
       <Link>XnaTexture.cs</Link>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\BasicPrimitiveBuddy\Windows\BasicPrimitiveBuddy.Windows.csproj">
