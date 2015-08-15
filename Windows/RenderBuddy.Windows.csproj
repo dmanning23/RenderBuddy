@@ -108,11 +108,6 @@
       <Link>XnaTexture.cs</Link>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Source\Content\AnimationBuddyShader.fx">
-      <Link>Shaders\AnimationBuddyShader.fx</Link>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\BasicPrimitiveBuddy\Windows\BasicPrimitiveBuddy.Windows.csproj">
@@ -129,6 +124,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Content\AnimationBuddyShader.fx">
+      <Link>Shaders\AnimationBuddyShader.fx</Link>
+    </None>
     <Content Include="..\Content\bin\AnimationBuddyShader.xnb">
       <Link>Content\Shaders\AnimationBuddyShader.xnb</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

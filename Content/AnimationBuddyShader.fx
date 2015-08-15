@@ -24,6 +24,9 @@ float4 main(float4 color : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
 	//Look up the texture value
 	float4 tex = tex2D(TextureSampler, texCoord);
 
+	//the final color we are going to use, either primary or secondary
+	float4 texColor = color;
+
 	if (tex.a > 0.0)
 	{
 		//If there is a palette swap, add it to the texture color
@@ -33,7 +36,7 @@ float4 main(float4 color : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
 			float4 paletteSwap = tex2D(ColorMaskSampler, texCoord);
 			if (paletteSwap.a > 0.0)
 			{
-				tex = (tex * (1.0 - paletteSwap.a)) + (paletteSwap * ColorMask);
+				texColor = (texColor * (1.0 - paletteSwap.a)) + (paletteSwap * ColorMask);
 			}
 		}
 
@@ -64,11 +67,11 @@ float4 main(float4 color : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
 
 			//Compute lighting.
 			float lightAmount = max(dot(normal.xyz, rotatedLight), 0.0);
-			color.rgb *= AmbientColor + (lightAmount * LightColor);
+			texColor.rgb *= AmbientColor + (lightAmount * LightColor);
 		}
 	}
 
-	return tex * color;
+	return tex * texColor;
 }
 
 technique Normalmap
