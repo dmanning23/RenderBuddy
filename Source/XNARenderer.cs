@@ -22,6 +22,13 @@ namespace RenderBuddy
 		/// </summary>
 		public GraphicsDevice Graphics { get; set; }
 
+		/// <summary>
+		/// Shader to draw the texture, light correctly using the supplied normal map
+		/// </summary>
+		private Effect _animationEffect;
+
+		private EffectParameterCollection _efectsParams;
+
 		#endregion
 
 		#region Initialization
@@ -64,6 +71,13 @@ namespace RenderBuddy
 			myBlendState.ColorDestinationBlend = Blend.InverseSourceAlpha;
 			Graphics.BlendState = myBlendState;
 
+			_animationEffect = Content.Load<Effect>(@"Shaders\AnimationBuddyShader");
+			_efectsParams = _animationEffect.Parameters;
+
+			_efectsParams["LightDirection"].SetValue(new Vector3(0f, 1f, .2f));
+			_efectsParams["AmbientColor"].SetValue(new Vector3(.45f, .45f, .45f));
+			_efectsParams["LightColor"].SetValue(new Vector3(1f, 1f, 1f));
+
 			Primitive = new XnaBasicPrimitive(graphics, SpriteBatch);
 		}
 
@@ -84,6 +98,8 @@ namespace RenderBuddy
 		{
 			Debug.Assert(null != image);
 			var tex = image as XnaTexture;
+			SetEffectParams(tex, secondaryColor, rotation, isFlipped);
+
 			SpriteBatch.Draw(
 				tex.Texture,
 				position,
@@ -100,6 +116,8 @@ namespace RenderBuddy
 		{
 			Debug.Assert(null != image);
 			var tex = image as XnaTexture;
+			SetEffectParams(tex, secondaryColor, rotation, isFlipped);
+
 			SpriteBatch.Draw(
 				tex.Texture,
 				destination,
@@ -109,6 +127,24 @@ namespace RenderBuddy
 				Vector2.Zero,
 				(isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None),
 				0.0f);
+		}
+
+		/// <summary>
+		/// Setup the effect params for rendering
+		/// </summary>
+		/// <param name="image"></param>
+		/// <param name="secondaryColor"></param>
+		/// <param name="rotation"></param>
+		/// <param name="isFlipped"></param>
+		private void SetEffectParams(XnaTexture image, Color secondaryColor, float rotation, bool isFlipped)
+		{
+			_efectsParams["NormalTexture"].SetValue(image.NormalMap);
+			_efectsParams["HasNormal"].SetValue(image.HasNormal);
+			_efectsParams["Rotation"].SetValue(rotation);
+			_efectsParams["ColorMaskTexture"].SetValue(image.ColorMask);
+			_efectsParams["HasColorMask"].SetValue(image.HasColorMask);
+			_efectsParams["ColorMask"].SetValue(secondaryColor.ToVector4());
+			_efectsParams["FlipHorizontal"].SetValue(isFlipped);
 		}
 
 		public override ITexture LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
@@ -143,7 +179,7 @@ namespace RenderBuddy
 				null,
 				null,
 				RasterizerState.CullNone,
-				null,
+				_animationEffect,
 				translation);
 		}
 

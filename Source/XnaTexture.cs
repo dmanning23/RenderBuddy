@@ -44,7 +44,7 @@ namespace RenderBuddy
 		{
 			get
 			{
-				return null == NormalMap;
+				return null != NormalMap;
 			}
 		}
 
@@ -52,7 +52,7 @@ namespace RenderBuddy
 		{
 			get
 			{
-				return null == ColorMask;
+				return null != ColorMask;
 			}
 		}
 
