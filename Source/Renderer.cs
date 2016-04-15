@@ -1,13 +1,14 @@
-using BasicPrimitiveBuddy;
+using CameraBuddy;
 using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using PrimitiveBuddy;
 using System.Diagnostics;
 
 namespace RenderBuddy
 {
-	public class XnaRenderer : RendererBase
+	public class Renderer : IRenderer
 	{
 		#region Properties
 
@@ -29,6 +30,22 @@ namespace RenderBuddy
 
 		private EffectParameterCollection _efectsParams;
 
+		/// <summary>
+		/// My own content manager, so images can be loaded separate from xml
+		/// </summary>
+		public ContentManager Content { get; protected set; }
+
+		/// <summary>
+		/// The camera we are going to use!
+		/// </summary>
+		public Camera Camera { get; protected set; }
+
+		/// <summary>
+		/// thing for rendering primitives.
+		/// </summary>
+		/// <value>The primitive.</value>
+		public Primitive Primitive { get; protected set; }
+
 		#endregion
 
 		#region Initialization
@@ -37,7 +54,7 @@ namespace RenderBuddy
 		/// Hello, standard constructor!
 		/// </summary>
 		/// <param name="game">Reference to the game engine</param>
-		public XnaRenderer(Game game)
+		public Renderer(Game game)
 		{
 			//set up the content manager
 			Debug.Assert(null != game);
@@ -47,6 +64,12 @@ namespace RenderBuddy
 			//set up all the stuff
 			Graphics = null;
 			SpriteBatch = null;
+
+			//set up the camera
+			Camera = new Camera()
+			{
+				WorldBoundary = new Rectangle(-2000, -1000, 4000, 2000)
+			};
 		}
 
 		/// <summary>
@@ -78,13 +101,13 @@ namespace RenderBuddy
 			_efectsParams["AmbientColor"].SetValue(new Vector3(.45f, .45f, .45f));
 			_efectsParams["LightColor"].SetValue(new Vector3(1f, 1f, 1f));
 
-			Primitive = new XnaBasicPrimitive(graphics, SpriteBatch);
+			Primitive = new Primitive(graphics, SpriteBatch);
 		}
 
 		/// <summary>
 		/// Unload all the graphics content
 		/// </summary>
-		public override void UnloadGraphicsContent()
+		public void UnloadGraphicsContent()
 		{
 			//unload the bitmaps
 			Content.Unload();
@@ -94,10 +117,10 @@ namespace RenderBuddy
 
 		#region Methods
 
-		public override void Draw(ITexture image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale)
+		public void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale)
 		{
 			Debug.Assert(null != image);
-			var tex = image as XnaTexture;
+			var tex = image as TextureInfo;
 			SetEffectParams(tex, secondaryColor, rotation, isFlipped);
 
 			SpriteBatch.Draw(
@@ -112,14 +135,13 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public override void Draw(ITexture image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped)
+		public  void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped)
 		{
 			Debug.Assert(null != image);
-			var tex = image as XnaTexture;
-			SetEffectParams(tex, secondaryColor, rotation, isFlipped);
+			SetEffectParams(image, secondaryColor, rotation, isFlipped);
 
 			SpriteBatch.Draw(
-				tex.Texture,
+				image.Texture,
 				destination,
 				null,
 				primaryColor,
@@ -136,7 +158,7 @@ namespace RenderBuddy
 		/// <param name="secondaryColor"></param>
 		/// <param name="rotation"></param>
 		/// <param name="isFlipped"></param>
-		private void SetEffectParams(XnaTexture image, Color secondaryColor, float rotation, bool isFlipped)
+		private void SetEffectParams(TextureInfo image, Color secondaryColor, float rotation, bool isFlipped)
 		{
 			_efectsParams["NormalTexture"].SetValue(image.NormalMap);
 			_efectsParams["HasNormal"].SetValue(image.HasNormal);
@@ -147,9 +169,9 @@ namespace RenderBuddy
 			_efectsParams["FlipHorizontal"].SetValue(isFlipped);
 		}
 
-		public override ITexture LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
+		public TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
 		{
-			var tex = new XnaTexture()
+			var tex = new TextureInfo()
 			{
 				Texture = Content.Load<Texture2D>(textureFile.GetRelPathFileNoExt())
 			};
@@ -167,12 +189,12 @@ namespace RenderBuddy
 			return tex;
 		}
 
-		public override void SpriteBatchBegin(BlendState blendState, Matrix translation)
+		public void SpriteBatchBegin(BlendState blendState, Matrix translation)
 		{
 			SpriteBatchBegin(SpriteSortMode.Immediate, blendState, translation);
 		}
 
-		public override void SpriteBatchBegin(SpriteSortMode sortmode, BlendState blendState, Matrix translation)
+		public void SpriteBatchBegin(SpriteSortMode sortmode, BlendState blendState, Matrix translation)
 		{
 			SpriteBatch.Begin(sortmode,
 				blendState,
@@ -183,9 +205,15 @@ namespace RenderBuddy
 				translation);
 		}
 
-		public override void SpriteBatchEnd()
+		public void SpriteBatchEnd()
 		{
 			SpriteBatch.End();
+		}
+
+		public void DrawCameraInfo()
+		{
+			//draw the center point
+			Primitive.Point(Camera.Origin, Color.Red);
 		}
 
 		#endregion

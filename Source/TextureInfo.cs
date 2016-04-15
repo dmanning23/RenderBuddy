@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace RenderBuddy
 {
 	/// <summary>
-	/// This interface wraps up XNA.Texture2D
+	/// Class that wraps up a texture with it's normal and color maps
 	/// </summary>
-	public class XnaTexture : ITexture
+	public class TextureInfo
 	{
 		#region Properties
 
@@ -60,11 +60,11 @@ namespace RenderBuddy
 
 		#region Methods
 
-		public XnaTexture()
+		public TextureInfo()
 		{
 		}
 
-		public XnaTexture(Texture2D tex, Texture2D normalMap = null, Texture2D colorMask = null)
+		public TextureInfo(Texture2D tex, Texture2D normalMap = null, Texture2D colorMask = null)
 		{
 			Texture = tex;
 			NormalMap = normalMap;

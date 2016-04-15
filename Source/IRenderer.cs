@@ -1,4 +1,4 @@
-using BasicPrimitiveBuddy;
+using PrimitiveBuddy;
 using CameraBuddy;
 using FilenameBuddy;
 using Microsoft.Xna.Framework;
@@ -16,7 +16,7 @@ namespace RenderBuddy
 		/// </summary>
 		ContentManager Content { get; }
 
-		IBasicPrimitive Primitive { get; }
+		Primitive Primitive { get; }
 
 		Camera Camera { get; }
 
@@ -24,11 +24,11 @@ namespace RenderBuddy
 
 		#region Methods
 
-		void Draw(ITexture image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale);
+		void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale);
 
-		void Draw(ITexture image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped);
+		void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped);
 
-		ITexture LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null);
+		TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null);
 
 		void DrawCameraInfo();
 
