@@ -2,14 +2,14 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>RenderBuddy</id>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 		<title>RenderBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
 		<projectUrl>https://github.com/dmanning23/RenderBuddy</projectUrl>
 		<licenseUrl>https://github.com/dmanning23/RenderBuddy/blob/master/LICENSE.txt</licenseUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>MonoGame library to simplify drawing images</description>
+		<description>MonoGame library to simplify drawing normal-mapped images</description>
 		<releaseNotes />
 		<copyright>Copyright 2016</copyright>
 		<tags>pcl, windows phone, winphone, android, ios, windows universal, monogame</tags>

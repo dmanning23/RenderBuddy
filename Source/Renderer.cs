@@ -135,7 +135,7 @@ namespace RenderBuddy
 				0.0f);
 		}
 
-		public  void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped)
+		public void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped)
 		{
 			Debug.Assert(null != image);
 			SetEffectParams(image, secondaryColor, rotation, isFlipped);
