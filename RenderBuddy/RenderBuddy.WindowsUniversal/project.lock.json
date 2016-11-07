@@ -21,7 +21,7 @@
           "lib/uap10.0/CameraBuddy.WindowsUniversal.dll": {}
         }
       },
-      "FilenameBuddy/1.0.2": {
+      "FilenameBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -379,7 +379,7 @@
           "lib/uap10.0/RandomExtensions.WindowsUniversal.dll": {}
         }
       },
-      "ResolutionBuddy/1.0.2": {
+      "ResolutionBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "MatrixExtensions": "1.0.0",
@@ -2082,7 +2082,7 @@
           "lib/uap10.0/CameraBuddy.WindowsUniversal.dll": {}
         }
       },
-      "FilenameBuddy/1.0.2": {
+      "FilenameBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -2389,7 +2389,7 @@
           "lib/uap10.0/RandomExtensions.WindowsUniversal.dll": {}
         }
       },
-      "ResolutionBuddy/1.0.2": {
+      "ResolutionBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "MatrixExtensions": "1.0.0",
@@ -4009,7 +4009,7 @@
           "lib/uap10.0/CameraBuddy.WindowsUniversal.dll": {}
         }
       },
-      "FilenameBuddy/1.0.2": {
+      "FilenameBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -4314,7 +4314,7 @@
           "lib/uap10.0/RandomExtensions.WindowsUniversal.dll": {}
         }
       },
-      "ResolutionBuddy/1.0.2": {
+      "ResolutionBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "MatrixExtensions": "1.0.0",
@@ -5893,7 +5893,7 @@
           "lib/uap10.0/CameraBuddy.WindowsUniversal.dll": {}
         }
       },
-      "FilenameBuddy/1.0.2": {
+      "FilenameBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -6206,7 +6206,7 @@
           "lib/uap10.0/RandomExtensions.WindowsUniversal.dll": {}
         }
       },
-      "ResolutionBuddy/1.0.2": {
+      "ResolutionBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "MatrixExtensions": "1.0.0",
@@ -7829,7 +7829,7 @@
           "lib/uap10.0/CameraBuddy.WindowsUniversal.dll": {}
         }
       },
-      "FilenameBuddy/1.0.2": {
+      "FilenameBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -8134,7 +8134,7 @@
           "lib/uap10.0/RandomExtensions.WindowsUniversal.dll": {}
         }
       },
-      "ResolutionBuddy/1.0.2": {
+      "ResolutionBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "MatrixExtensions": "1.0.0",
@@ -9713,7 +9713,7 @@
           "lib/uap10.0/CameraBuddy.WindowsUniversal.dll": {}
         }
       },
-      "FilenameBuddy/1.0.2": {
+      "FilenameBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -10026,7 +10026,7 @@
           "lib/uap10.0/RandomExtensions.WindowsUniversal.dll": {}
         }
       },
-      "ResolutionBuddy/1.0.2": {
+      "ResolutionBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "MatrixExtensions": "1.0.0",
@@ -11649,7 +11649,7 @@
           "lib/uap10.0/CameraBuddy.WindowsUniversal.dll": {}
         }
       },
-      "FilenameBuddy/1.0.2": {
+      "FilenameBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
@@ -11954,7 +11954,7 @@
           "lib/uap10.0/RandomExtensions.WindowsUniversal.dll": {}
         }
       },
-      "ResolutionBuddy/1.0.2": {
+      "ResolutionBuddy/1.0.3": {
         "type": "package",
         "dependencies": {
           "MatrixExtensions": "1.0.0",
@@ -13532,11 +13532,11 @@
         "lib/uap10.0/CameraBuddy.WindowsUniversal.pdb"
       ]
     },
-    "FilenameBuddy/1.0.2": {
-      "sha512": "LIi0aT1JeQx0UveBSXk+hf2oLdH0b9y4GfM7kbO6uLJoGOpRQhxOCPFitDHc8ewFmdR2yX7fCnyq+tOLwd0Kdg==",
+    "FilenameBuddy/1.0.3": {
+      "sha512": "1tFJley50a9gEVyNDKHkNt9PVbfkfXbhf4P3OCmJVntUVmTzffpjhWKPyANfRJHi9Qd5vmLe+cjg8hOSnDjOhA==",
       "type": "package",
       "files": [
-        "FilenameBuddy.1.0.2.nupkg.sha512",
+        "FilenameBuddy.1.0.3.nupkg.sha512",
         "FilenameBuddy.nuspec",
         "lib/MonoAndroid10/FilenameBuddy.Android.dll",
         "lib/MonoAndroid10/FilenameBuddy.Android.pdb",
@@ -14216,11 +14216,11 @@
         "lib/uap10.0/RandomExtensions.WindowsUniversal.pdb"
       ]
     },
-    "ResolutionBuddy/1.0.2": {
-      "sha512": "xyRgyyxMiCW8n5SwlH2PSa2BxGyD1X28P5fuw9lzMlrsacSuLoHu8hCrJEBT5w9+0YCJp9qSnRZVC9MKRXpATg==",
+    "ResolutionBuddy/1.0.3": {
+      "sha512": "IpeWsjYAGPzdxtcHLy1mwwX8bSxGNQmtDH2a1GDjZ3fmtgeuXO+ECsZNBG1z8IsdqhObCQemocjehJfg/PiCnQ==",
       "type": "package",
       "files": [
-        "ResolutionBuddy.1.0.2.nupkg.sha512",
+        "ResolutionBuddy.1.0.3.nupkg.sha512",
         "ResolutionBuddy.nuspec",
         "lib/MonoAndroid10/ResolutionBuddy.Android.dll",
         "lib/MonoAndroid10/ResolutionBuddy.Android.pdb",
@@ -16982,14 +16982,14 @@
   "projectFileDependencyGroups": {
     "": [
       "CameraBuddy >= 1.0.1",
-      "FilenameBuddy >= 1.0.2",
+      "FilenameBuddy >= 1.0.3",
       "GameTimer >= 1.0.1",
       "MatrixExtensions >= 1.0.1",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0",
       "MonoGame.Framework.WindowsUniversal >= 3.5.1.1679",
       "PrimitiveBuddy >= 1.0.0",
       "RandomExtensions.dmanning23 >= 1.0.2",
-      "ResolutionBuddy >= 1.0.2",
+      "ResolutionBuddy >= 1.0.3",
       "Vector2Extensions >= 1.0.1"
     ],
     "UAP,Version=v10.0": []

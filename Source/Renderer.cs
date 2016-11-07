@@ -176,12 +176,12 @@ namespace RenderBuddy
 				Texture = Content.Load<Texture2D>(textureFile.GetRelPathFileNoExt())
 			};
 
-			if (null != normalMapFile)
+			if (null != normalMapFile && !string.IsNullOrEmpty(normalMapFile.File))
 			{
 				tex.NormalMap = Content.Load<Texture2D>(normalMapFile.GetRelPathFileNoExt());
 			}
 
-			if (null != colorMaskFile)
+			if (null != colorMaskFile && !string.IsNullOrEmpty(colorMaskFile.File))
 			{
 				tex.ColorMask = Content.Load<Texture2D>(colorMaskFile.GetRelPathFileNoExt());
 			}
