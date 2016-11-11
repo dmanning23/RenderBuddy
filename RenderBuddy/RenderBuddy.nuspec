@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>RenderBuddy</id>
-		<version>1.0.3</version>
+		<version>1.0.8</version>
 		<title>RenderBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -70,6 +70,8 @@
 		</dependencies>
 	</metadata>
 	<files>
+
+		<file src="..\Content\AnimationBuddyShader.fx" target="content\Content\AnimationBuddyShader.fx" />
 
 		<!--Xamarin.Android-->
 		<file src="RenderBuddy.Android\bin\Release\RenderBuddy.Android.pdb" target="lib\MonoAndroid10\RenderBuddy.Android.pdb" />

@@ -76,19 +76,11 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Source\IRenderer.cs">
-      <Link>IRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Renderer.cs">
-      <Link>Renderer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\TextureInfo.cs">
-      <Link>TextureInfo.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

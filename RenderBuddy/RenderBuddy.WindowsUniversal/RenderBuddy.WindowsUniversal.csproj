@@ -107,18 +107,10 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Source\IRenderer.cs">
-      <Link>IRenderer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\Renderer.cs">
-      <Link>Renderer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Source\TextureInfo.cs">
-      <Link>TextureInfo.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\RenderBuddy.WindowsUniversal.rd.xml" />
   </ItemGroup>
+  <Import Project="..\RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -46,6 +46,11 @@ namespace RenderBuddy
 		/// <value>The primitive.</value>
 		public Primitive Primitive { get; protected set; }
 
+		/// <summary>
+		/// The object used to load textures
+		/// </summary>
+		public ITextureLoader TextureLoader { private get; set; }
+
 		#endregion
 
 		#region Initialization
@@ -60,6 +65,7 @@ namespace RenderBuddy
 			Debug.Assert(null != game);
 			Debug.Assert(null == Content);
 			Content = new ContentManager(game.Services, "Content");
+			TextureLoader = new TextureContentLoader();
 
 			//set up all the stuff
 			Graphics = null;
@@ -94,7 +100,7 @@ namespace RenderBuddy
 			myBlendState.ColorDestinationBlend = Blend.InverseSourceAlpha;
 			Graphics.BlendState = myBlendState;
 
-			_animationEffect = Content.Load<Effect>(@"Shaders\AnimationBuddyShader");
+			_animationEffect = Content.Load<Effect>(@"AnimationBuddyShader");
 			_efectsParams = _animationEffect.Parameters;
 
 			_efectsParams["LightDirection"].SetValue(new Vector3(0f, 1f, .2f));
@@ -171,22 +177,7 @@ namespace RenderBuddy
 
 		public TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
 		{
-			var tex = new TextureInfo()
-			{
-				Texture = Content.Load<Texture2D>(textureFile.GetRelPathFileNoExt())
-			};
-
-			if (null != normalMapFile && !string.IsNullOrEmpty(normalMapFile.File))
-			{
-				tex.NormalMap = Content.Load<Texture2D>(normalMapFile.GetRelPathFileNoExt());
-			}
-
-			if (null != colorMaskFile && !string.IsNullOrEmpty(colorMaskFile.File))
-			{
-				tex.ColorMask = Content.Load<Texture2D>(colorMaskFile.GetRelPathFileNoExt());
-			}
-
-			return tex;
+			return TextureLoader.LoadImage(this, textureFile, normalMapFile, colorMaskFile);
 		}
 
 		public void SpriteBatchBegin(BlendState blendState, Matrix translation)

@@ -17,7 +17,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		RenderBuddy.nuspec = RenderBuddy.nuspec
 	EndProjectSection
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RenderBuddy.SharedProject", "RenderBuddy.SharedProject\RenderBuddy.SharedProject.shproj", "{43CDB02F-8DF5-4059-8056-12C04386DF1E}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{2dc89b77-ace6-4fa2-8846-0f5f98303414}*SharedItemsImports = 4
+		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{3dc38273-ed5b-4385-ae85-79d7f1b39541}*SharedItemsImports = 4
+		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{43cdb02f-8df5-4059-8056-12c04386df1e}*SharedItemsImports = 13
+		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{cf5fcab8-097c-468a-926a-3b4fa3590605}*SharedItemsImports = 4
+		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{3ff4694e-b0cc-42f3-852f-fbe10ae8e09f}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU
 		AppStore|ARM = AppStore|ARM

@@ -11,6 +11,8 @@ namespace RenderBuddy
 	{
 		#region Properties
 
+		GraphicsDevice Graphics { get; set; }
+
 		/// <summary>
 		/// My own content manager, so images can be loaded separate from xml
 		/// </summary>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>43cdb02f-8df5-4059-8056-12c04386df1e</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>RenderBuddy.SharedProject</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)IRenderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ITextureLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextureContentLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextureFileLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TextureInfo.cs" />
+  </ItemGroup>
+</Project>
