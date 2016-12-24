@@ -1,15 +1,17 @@
-using PrimitiveBuddy;
 using CameraBuddy;
 using FilenameBuddy;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using PrimitiveBuddy;
 
 namespace RenderBuddy
 {
 	public interface IRenderer
 	{
 		#region Properties
+
+		SpriteBatch SpriteBatch { get; }
 
 		GraphicsDevice Graphics { get; set; }
 
@@ -30,6 +32,8 @@ namespace RenderBuddy
 
 		void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped);
 
+		void LoadContent(GraphicsDevice graphics);
+
 		TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null);
 
 		void DrawCameraInfo();
@@ -38,6 +42,8 @@ namespace RenderBuddy
 		/// Unload all the graphics content
 		/// </summary>
 		void UnloadGraphicsContent();
+
+		void SpriteBatchBegin(SpriteSortMode sortmode, BlendState blendState, Matrix translation);
 
 		/// <summary>
 		/// called at the start of the draw loop

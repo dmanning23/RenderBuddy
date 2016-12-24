@@ -1,5 +1,4 @@
 ﻿using FilenameBuddy;
-using Microsoft.Xna.Framework.Content;
 
 namespace RenderBuddy
 {
