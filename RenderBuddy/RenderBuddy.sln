@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderBuddy.Android", "RenderBuddy.Android\RenderBuddy.Android.csproj", "{2DC89B77-ACE6-4FA2-8846-0F5F98303414}"
 EndProject
@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderBuddy.WindowsUniversa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D47CEB3E-C791-445A-BBB6-D750BC64CA6C}"
 	ProjectSection(SolutionItems) = preProject
+		..\Content\AnimationBuddyShader.fx = ..\Content\AnimationBuddyShader.fx
 		buildNugetPackages.ps1 = buildNugetPackages.ps1
 		RenderBuddy.nuspec = RenderBuddy.nuspec
 	EndProjectSection
@@ -23,9 +24,9 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{2dc89b77-ace6-4fa2-8846-0f5f98303414}*SharedItemsImports = 4
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{3dc38273-ed5b-4385-ae85-79d7f1b39541}*SharedItemsImports = 4
+		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{3ff4694e-b0cc-42f3-852f-fbe10ae8e09f}*SharedItemsImports = 4
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{43cdb02f-8df5-4059-8056-12c04386df1e}*SharedItemsImports = 13
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{cf5fcab8-097c-468a-926a-3b4fa3590605}*SharedItemsImports = 4
-		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{3ff4694e-b0cc-42f3-852f-fbe10ae8e09f}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AppStore|Any CPU = AppStore|Any CPU

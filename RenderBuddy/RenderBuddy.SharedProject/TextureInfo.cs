@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace RenderBuddy
@@ -23,6 +24,8 @@ namespace RenderBuddy
 		/// The color mask to be drawn for this image
 		/// </summary>
 		public Texture2D ColorMask { get; set; }
+
+		public Rectangle? SourceRectangle { get; set; }
 
 		public int Width
 		{
@@ -64,11 +67,12 @@ namespace RenderBuddy
 		{
 		}
 
-		public TextureInfo(Texture2D tex, Texture2D normalMap = null, Texture2D colorMask = null)
+		public TextureInfo(Texture2D tex, Texture2D normalMap = null, Texture2D colorMask = null, Rectangle? sourceRectangle = null)
 		{
 			Texture = tex;
 			NormalMap = normalMap;
 			ColorMask = colorMask;
+			SourceRectangle = SourceRectangle;
 		}
 
 		#endregion Methods

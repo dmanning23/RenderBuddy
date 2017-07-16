@@ -117,6 +117,7 @@ namespace RenderBuddy
 		{
 			//unload the bitmaps
 			Content.Unload();
+			Content = null;
 		}
 
 		#endregion
@@ -132,7 +133,7 @@ namespace RenderBuddy
 			SpriteBatch.Draw(
 				tex.Texture,
 				position,
-				null,
+				image.SourceRectangle.HasValue ? image.SourceRectangle : null,
 				primaryColor,
 				rotation,
 				Vector2.Zero,
@@ -149,7 +150,7 @@ namespace RenderBuddy
 			SpriteBatch.Draw(
 				image.Texture,
 				destination,
-				null,
+				image.SourceRectangle.HasValue ? image.SourceRectangle : null,
 				primaryColor,
 				rotation,
 				Vector2.Zero,
