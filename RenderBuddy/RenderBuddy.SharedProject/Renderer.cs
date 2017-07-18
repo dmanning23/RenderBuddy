@@ -59,12 +59,12 @@ namespace RenderBuddy
 		/// Hello, standard constructor!
 		/// </summary>
 		/// <param name="game">Reference to the game engine</param>
-		public Renderer(Game game)
+		public Renderer(Game game, ContentManager content)
 		{
 			//set up the content manager
 			Debug.Assert(null != game);
-			Debug.Assert(null == Content);
-			Content = new ContentManager(game.Services, "Content");
+			Debug.Assert(null != content);
+			Content = content;
 			TextureLoader = new TextureContentLoader();
 
 			//set up all the stuff
@@ -108,16 +108,6 @@ namespace RenderBuddy
 			_efectsParams["LightColor"].SetValue(new Vector3(1f, 1f, 1f));
 
 			Primitive = new Primitive(graphics, SpriteBatch);
-		}
-
-		/// <summary>
-		/// Unload all the graphics content
-		/// </summary>
-		public void UnloadGraphicsContent()
-		{
-			//unload the bitmaps
-			Content.Unload();
-			Content = null;
 		}
 
 		#endregion

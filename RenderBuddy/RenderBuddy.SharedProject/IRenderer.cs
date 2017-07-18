@@ -38,11 +38,6 @@ namespace RenderBuddy
 
 		void DrawCameraInfo();
 
-		/// <summary>
-		/// Unload all the graphics content
-		/// </summary>
-		void UnloadGraphicsContent();
-
 		void SpriteBatchBegin(SpriteSortMode sortmode, BlendState blendState, Matrix translation);
 
 		/// <summary>
