@@ -43,7 +43,7 @@ namespace RenderBuddy
 			}
 		}
 
-		public bool HasNormal 
+		public bool HasNormal
 		{
 			get
 			{
@@ -51,7 +51,7 @@ namespace RenderBuddy
 			}
 		}
 
-		public bool HasColorMask 
+		public bool HasColorMask
 		{
 			get
 			{
@@ -65,6 +65,18 @@ namespace RenderBuddy
 
 		public TextureInfo()
 		{
+		}
+
+		public TextureInfo(TextureInfo inst)
+		{
+			Texture = inst.Texture;
+			NormalMap = inst.NormalMap;
+			ColorMask = inst.ColorMask;
+			if (inst.SourceRectangle.HasValue)
+			{
+				SourceRectangle = new Rectangle(inst.SourceRectangle.Value.Location, inst.SourceRectangle.Value.Size);
+			}
+			
 		}
 
 		public TextureInfo(Texture2D tex, Texture2D normalMap = null, Texture2D colorMask = null, Rectangle? sourceRectangle = null)

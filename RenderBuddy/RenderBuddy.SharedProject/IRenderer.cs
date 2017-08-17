@@ -24,6 +24,12 @@ namespace RenderBuddy
 
 		Camera Camera { get; }
 
+		Vector3 LightDirection { get; set; }
+
+		Color LightColor { get; set; }
+
+		Color AmbientColor { get; set; }
+
 		#endregion //Properties
 
 		#region Methods

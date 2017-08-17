@@ -51,6 +51,12 @@ namespace RenderBuddy
 		/// </summary>
 		public ITextureLoader TextureLoader { private get; set; }
 
+		public Vector3 LightDirection { get; set; }
+
+		public Color LightColor { get; set; }
+
+		public Color AmbientColor { get; set; }
+
 		#endregion
 
 		#region Initialization
@@ -61,6 +67,10 @@ namespace RenderBuddy
 		/// <param name="game">Reference to the game engine</param>
 		public Renderer(Game game, ContentManager content)
 		{
+			LightDirection = new Vector3(0f, -1f, .2f);
+			AmbientColor = new Color(.45f, .45f, .45f);
+			LightColor = new Color(1f, 1f, 1f);
+
 			//set up the content manager
 			Debug.Assert(null != game);
 			Debug.Assert(null != content);
@@ -103,9 +113,9 @@ namespace RenderBuddy
 			_animationEffect = Content.Load<Effect>(@"AnimationBuddyShader");
 			_efectsParams = _animationEffect.Parameters;
 
-			_efectsParams["LightDirection"].SetValue(new Vector3(0f, 1f, .2f));
-			_efectsParams["AmbientColor"].SetValue(new Vector3(.45f, .45f, .45f));
-			_efectsParams["LightColor"].SetValue(new Vector3(1f, 1f, 1f));
+			_efectsParams["LightDirection"].SetValue(LightDirection);
+			_efectsParams["AmbientColor"].SetValue(AmbientColor.ToVector3());
+			_efectsParams["LightColor"].SetValue(LightColor.ToVector3());
 
 			Primitive = new Primitive(graphics, SpriteBatch);
 		}
