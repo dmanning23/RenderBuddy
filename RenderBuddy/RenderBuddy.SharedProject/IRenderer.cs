@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PrimitiveBuddy;
+using System.Collections.Generic;
 
 namespace RenderBuddy
 {
@@ -24,15 +25,21 @@ namespace RenderBuddy
 
 		Camera Camera { get; }
 
-		Vector3 LightDirection { get; set; }
-
-		Color LightColor { get; set; }
-
 		Color AmbientColor { get; set; }
+
+		List<DirectionLight> DirectionLights { get; }
+
+		List<PointLight> PointLights { get; }
 
 		#endregion //Properties
 
 		#region Methods
+
+		void ClearLights();
+
+		void AddDirectionalLight(Vector3 direction, Color color);
+
+		void AddPointLight(Vector2 position, float radius, float brightness, Color color);
 
 		void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale);
 

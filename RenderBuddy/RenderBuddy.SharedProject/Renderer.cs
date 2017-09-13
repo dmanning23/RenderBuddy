@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PrimitiveBuddy;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace RenderBuddy
@@ -28,7 +29,7 @@ namespace RenderBuddy
 		/// </summary>
 		private Effect _animationEffect;
 
-		private EffectParameterCollection _efectsParams;
+		private EffectParameterCollection _effectsParams;
 
 		/// <summary>
 		/// My own content manager, so images can be loaded separate from xml
@@ -51,11 +52,29 @@ namespace RenderBuddy
 		/// </summary>
 		public ITextureLoader TextureLoader { private get; set; }
 
-		public Vector3 LightDirection { get; set; }
+		private Color _ambientColor;
+		public Color AmbientColor
+		{
+			get { return _ambientColor; }
+			set
+			{
+				_ambientColor = value;
+				if (null != _effectsParams)
+				{
+					_effectsParams["AmbientColor"].SetValue(AmbientColor.ToVector3());
+				}
+			}
+		}
 
-		public Color LightColor { get; set; }
+		public List<DirectionLight> DirectionLights { get; private set; }
 
-		public Color AmbientColor { get; set; }
+		public List<PointLight> PointLights { get; private set; }
+
+		public const int MaxDirectionLights = 4;
+		public const int MaxPointLights = 32;
+
+		private Vector3[] _directionLights = new Vector3[MaxDirectionLights];
+		private Vector3[] _directionLightColors = new Vector3[MaxDirectionLights];
 
 		#endregion
 
@@ -67,9 +86,14 @@ namespace RenderBuddy
 		/// <param name="game">Reference to the game engine</param>
 		public Renderer(Game game, ContentManager content)
 		{
-			LightDirection = new Vector3(0f, -1f, .2f);
-			AmbientColor = new Color(.45f, .45f, .45f);
-			LightColor = new Color(1f, 1f, 1f);
+			AmbientColor = new Color(.35f, .35f, .35f);
+
+			DirectionLights = new List<DirectionLight>();
+
+			//Add a default directional light
+			DirectionLights.Add(new DirectionLight(new Vector3(0f, -1f, .2f), new Color(1f, 1f, .75f)));
+
+			PointLights = new List<PointLight>();
 
 			//set up the content manager
 			Debug.Assert(null != game);
@@ -111,13 +135,32 @@ namespace RenderBuddy
 			Graphics.BlendState = myBlendState;
 
 			_animationEffect = Content.Load<Effect>(@"AnimationBuddyShader");
-			_efectsParams = _animationEffect.Parameters;
-
-			_efectsParams["LightDirection"].SetValue(LightDirection);
-			_efectsParams["AmbientColor"].SetValue(AmbientColor.ToVector3());
-			_efectsParams["LightColor"].SetValue(LightColor.ToVector3());
+			_effectsParams = _animationEffect.Parameters;
+			_effectsParams["AmbientColor"].SetValue(AmbientColor.ToVector3());
 
 			Primitive = new Primitive(graphics, SpriteBatch);
+		}
+
+		public void ClearLights()
+		{
+			DirectionLights.Clear();
+			PointLights.Clear();
+		}
+
+		public void AddDirectionalLight(Vector3 direction, Color color)
+		{
+			if (DirectionLights.Count < MaxDirectionLights)
+			{
+				DirectionLights.Add(new DirectionLight(direction, color));
+			}
+		}
+
+		public void AddPointLight(Vector2 position, float radius, float brightness, Color color)
+		{
+			if (PointLights.Count < MaxPointLights)
+			{
+				PointLights.Add(new PointLight(position, radius, brightness, color));
+			}
 		}
 
 		#endregion
@@ -167,13 +210,23 @@ namespace RenderBuddy
 		/// <param name="isFlipped"></param>
 		private void SetEffectParams(TextureInfo image, Color secondaryColor, float rotation, bool isFlipped)
 		{
-			_efectsParams["NormalTexture"].SetValue(image.NormalMap);
-			_efectsParams["HasNormal"].SetValue(image.HasNormal);
-			_efectsParams["Rotation"].SetValue(rotation);
-			_efectsParams["ColorMaskTexture"].SetValue(image.ColorMask);
-			_efectsParams["HasColorMask"].SetValue(image.HasColorMask);
-			_efectsParams["ColorMask"].SetValue(secondaryColor.ToVector4());
-			_efectsParams["FlipHorizontal"].SetValue(isFlipped);
+			_effectsParams["NormalTexture"].SetValue(image.NormalMap);
+			_effectsParams["HasNormal"].SetValue(image.HasNormal);
+			_effectsParams["Rotation"].SetValue(rotation);
+			_effectsParams["ColorMaskTexture"].SetValue(image.ColorMask);
+			_effectsParams["HasColorMask"].SetValue(image.HasColorMask);
+			_effectsParams["ColorMask"].SetValue(secondaryColor.ToVector4());
+			_effectsParams["FlipHorizontal"].SetValue(isFlipped);
+
+			for (var i = 0; i < DirectionLights.Count; i++)
+			{
+				_directionLights[i] = DirectionLights[i].Direction;
+				_directionLightColors[i] = DirectionLights[i].Color.ToVector3();
+			}
+
+			_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
+			_effectsParams["DirectionLights"].SetValue(_directionLights);
+			_effectsParams["DirectionLightColors"].SetValue(_directionLightColors);
 		}
 
 		public TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
