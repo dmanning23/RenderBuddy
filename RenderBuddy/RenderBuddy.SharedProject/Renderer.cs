@@ -1,9 +1,11 @@
 using CameraBuddy;
 using FilenameBuddy;
+using MatrixExtensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PrimitiveBuddy;
+using ResolutionBuddy;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -52,6 +54,8 @@ namespace RenderBuddy
 		/// </summary>
 		public ITextureLoader TextureLoader { private get; set; }
 
+		#region Ambient Light
+
 		private Color _ambientColor;
 		public Color AmbientColor
 		{
@@ -66,17 +70,32 @@ namespace RenderBuddy
 			}
 		}
 
+		#endregion //Ambient Light
+
+		#region Direction Lights
+
 		public List<DirectionLight> DirectionLights { get; private set; }
 
-		public List<PointLight> PointLights { get; private set; }
-
 		public const int MaxDirectionLights = 4;
-		public const int MaxPointLights = 32;
 
 		private Vector3[] _directionLights = new Vector3[MaxDirectionLights];
 		private Vector3[] _directionLightColors = new Vector3[MaxDirectionLights];
 
-		#endregion
+		#endregion //Direction Lights
+
+		#region Point Lights
+
+		public List<PointLight> PointLights { get; private set; }
+
+		public const int MaxPointLights = 32;
+
+		private Vector3[] _pointLights = new Vector3[MaxPointLights];
+		private Vector3[] _pointLightColors = new Vector3[MaxPointLights];
+		private float[] _pointLightBrightness = new float[MaxPointLights];
+
+		#endregion //Point Lights
+
+		#endregion //Properties
 
 		#region Initialization
 
@@ -96,8 +115,6 @@ namespace RenderBuddy
 			PointLights = new List<PointLight>();
 
 			//set up the content manager
-			Debug.Assert(null != game);
-			Debug.Assert(null != content);
 			Content = content;
 			TextureLoader = new TextureContentLoader();
 
@@ -118,15 +135,11 @@ namespace RenderBuddy
 		public void LoadContent(GraphicsDevice graphics)
 		{
 			//grab all the member variables
-			Debug.Assert(null != graphics);
 			Graphics = graphics;
 
 			SpriteBatch = new SpriteBatch(Graphics);
 
 			//setup all the rendering stuff
-			Debug.Assert(null != Graphics);
-			Debug.Assert(null != Graphics.BlendState);
-
 			BlendState myBlendState = new BlendState();
 			myBlendState.AlphaSourceBlend = Blend.SourceAlpha;
 			myBlendState.ColorSourceBlend = Blend.SourceAlpha;
@@ -155,12 +168,17 @@ namespace RenderBuddy
 			}
 		}
 
-		public void AddPointLight(Vector2 position, float radius, float brightness, Color color)
+		public void AddPointLight(PointLight pointLight)
 		{
 			if (PointLights.Count < MaxPointLights)
 			{
-				PointLights.Add(new PointLight(position, radius, brightness, color));
+				PointLights.Add(pointLight);
 			}
+		}
+
+		public void AddPointLight(Vector3 position, float brightness, Color color)
+		{
+			AddPointLight(new PointLight(position, brightness, color));
 		}
 
 		#endregion
@@ -169,7 +187,6 @@ namespace RenderBuddy
 
 		public void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale)
 		{
-			Debug.Assert(null != image);
 			var tex = image as TextureInfo;
 			SetEffectParams(tex, secondaryColor, rotation, isFlipped);
 
@@ -187,7 +204,6 @@ namespace RenderBuddy
 
 		public void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped)
 		{
-			Debug.Assert(null != image);
 			SetEffectParams(image, secondaryColor, rotation, isFlipped);
 
 			SpriteBatch.Draw(
@@ -218,15 +234,29 @@ namespace RenderBuddy
 			_effectsParams["ColorMask"].SetValue(secondaryColor.ToVector4());
 			_effectsParams["FlipHorizontal"].SetValue(isFlipped);
 
+			//Add the direction lights
 			for (var i = 0; i < DirectionLights.Count; i++)
 			{
 				_directionLights[i] = DirectionLights[i].Direction;
 				_directionLightColors[i] = DirectionLights[i].Color.ToVector3();
 			}
-
 			_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
 			_effectsParams["DirectionLights"].SetValue(_directionLights);
 			_effectsParams["DirectionLightColors"].SetValue(_directionLightColors);
+
+			//Add the point lights
+			for (var i = 0; i < PointLights.Count; i++)
+			{
+				var pos = MatrixExt.Multiply(Camera.TranslationMatrix, new Vector2(PointLights[i].Position.X, PointLights[i].Position.Y));
+				pos.Y = Resolution.ScreenArea.Bottom - pos.Y;
+				_pointLights[i] = new Vector3(pos.X, pos.Y, PointLights[i].Position.Z);
+				_pointLightColors[i] = PointLights[i].Color.ToVector3();
+				_pointLightBrightness[i] = PointLights[i].Brightness * Camera.Scale;
+			}
+			_effectsParams["NumberOfPointLights"].SetValue(PointLights.Count);
+			_effectsParams["PointLights"].SetValue(_pointLights);
+			_effectsParams["PointLightColors"].SetValue(_pointLightColors);
+			_effectsParams["PointLightBrightness"].SetValue(_pointLightBrightness);
 		}
 
 		public TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)

@@ -39,7 +39,7 @@ namespace RenderBuddy
 
 		void AddDirectionalLight(Vector3 direction, Color color);
 
-		void AddPointLight(Vector2 position, float radius, float brightness, Color color);
+		void AddPointLight(Vector3 position, float brightness, Color color);
 
 		void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale);
 
