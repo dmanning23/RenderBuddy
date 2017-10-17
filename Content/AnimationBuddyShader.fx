@@ -48,7 +48,7 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 		//If there is a palette swap, add it to the texture color
 		if (HasColorMask == true)
 		{
-			//Get the texture from the palette
+			//Get the color from the palette swap texture
 			float4 paletteSwap = tex2D(ColorMaskSampler, texCoord);
 			if (paletteSwap.a > 0.0)
 			{
@@ -66,6 +66,7 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 			float4 normal = tex2D(NormalSampler, texCoord);
 			if (FlipHorizontal == true)
 			{
+				//If we are drawing a flipped image, reverse the normal
 				normal.x = 1 - normal.x;
 			}
 			normal = 2.0 * normal - 1.0;
@@ -127,6 +128,27 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 				//Compute lighting.
 				float lightAmount = saturate(dot(normal.xyz, rotatedLight)) * PointLightBrightness[i];
 				lightColor += (lightAmount * PointLightColors[i]);
+
+				//if (lightAmount > 0.0)
+				//{
+
+				//	// Sample the pixel from the specular map texture.
+				//	float specularIntensity = 1;
+
+				//	// Calculate the reflection vector based on the light intensity, normal vector, and light direction.
+				//	float3 reflection = normalize(2 * lightAmount * normal - rotatedLight);
+
+				//	// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
+				//	float3 viewDirection = { 0,0,-1 };
+				//	float specularPower = 16;
+				//	float4 specular = pow(saturate(dot(reflection, viewDirection)), specularPower);
+
+				//	// Use the specular map to determine the intensity of specular light at this pixel.
+				//	specular = specular * specularIntensity;
+
+				//	// Add the specular component last to the output color.
+				//	lightColor = saturate(lightColor + specular);
+				//}
 			}
 
 			texColor.rgb *= lightColor;

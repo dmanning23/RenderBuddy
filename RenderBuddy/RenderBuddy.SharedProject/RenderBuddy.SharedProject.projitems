@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DirectionLight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FlarePointLight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FlashPointLight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ILight.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ITextureLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PointLight.cs" />

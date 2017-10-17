@@ -1,5 +1,6 @@
 using CameraBuddy;
 using FilenameBuddy;
+using GameTimer;
 using MatrixExtensions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -7,11 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 using PrimitiveBuddy;
 using ResolutionBuddy;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace RenderBuddy
 {
-	public class Renderer : IRenderer
+	public class Renderer : IRenderer 
 	{
 		#region Properties
 
@@ -53,6 +53,8 @@ namespace RenderBuddy
 		/// The object used to load textures
 		/// </summary>
 		public ITextureLoader TextureLoader { private get; set; }
+
+		public GameClock Clock { get; set; }
 
 		#region Ambient Light
 
@@ -127,6 +129,8 @@ namespace RenderBuddy
 			{
 				WorldBoundary = new Rectangle(-2000, -1000, 4000, 2000)
 			};
+
+			Clock = new GameClock();
 		}
 
 		/// <summary>
@@ -179,6 +183,41 @@ namespace RenderBuddy
 		public void AddPointLight(Vector3 position, float brightness, Color color)
 		{
 			AddPointLight(new PointLight(position, brightness, color));
+		}
+
+		public void Update(GameTime gameTime)
+		{
+			Clock.Update(gameTime);
+
+			//clean up any expired lights
+			int i = 0;
+			while (i < DirectionLights.Count)
+			{
+				DirectionLights[i].Update(Clock);
+				if (DirectionLights[i].IsDead)
+				{
+					DirectionLights.RemoveAt(i);
+				}
+				else
+				{
+					i++;
+				}
+			}
+
+			i = 0;
+			while (i < PointLights.Count)
+			{
+				PointLights[i].Update(Clock);
+				if (PointLights[i].IsDead)
+				{
+					PointLights.RemoveAt(i);
+				}
+				else
+				{
+					i++;
+				}
+			}
+
 		}
 
 		#endregion
@@ -240,7 +279,7 @@ namespace RenderBuddy
 				_directionLights[i] = DirectionLights[i].Direction;
 				_directionLightColors[i] = DirectionLights[i].Color.ToVector3();
 			}
-			_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
+			//_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
 			_effectsParams["DirectionLights"].SetValue(_directionLights);
 			_effectsParams["DirectionLightColors"].SetValue(_directionLightColors);
 
@@ -253,10 +292,10 @@ namespace RenderBuddy
 				_pointLightColors[i] = PointLights[i].Color.ToVector3();
 				_pointLightBrightness[i] = PointLights[i].Brightness * Camera.Scale;
 			}
-			_effectsParams["NumberOfPointLights"].SetValue(PointLights.Count);
-			_effectsParams["PointLights"].SetValue(_pointLights);
-			_effectsParams["PointLightColors"].SetValue(_pointLightColors);
-			_effectsParams["PointLightBrightness"].SetValue(_pointLightBrightness);
+			//_effectsParams["NumberOfPointLights"].SetValue(PointLights.Count);
+			//_effectsParams["PointLights"].SetValue(_pointLights);
+			//_effectsParams["PointLightColors"].SetValue(_pointLightColors);
+			//_effectsParams["PointLightBrightness"].SetValue(_pointLightBrightness);
 		}
 
 		public TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
