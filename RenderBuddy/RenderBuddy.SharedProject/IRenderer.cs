@@ -21,6 +21,8 @@ namespace RenderBuddy
 		/// </summary>
 		ContentManager Content { get; }
 
+		ITextureLoader TextureLoader { set; }
+
 		Primitive Primitive { get; }
 
 		Camera Camera { get; }

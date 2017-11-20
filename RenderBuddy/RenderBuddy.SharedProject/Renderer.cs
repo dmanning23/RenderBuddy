@@ -279,7 +279,7 @@ namespace RenderBuddy
 				_directionLights[i] = DirectionLights[i].Direction;
 				_directionLightColors[i] = DirectionLights[i].Color.ToVector3();
 			}
-			//_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
+			_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
 			_effectsParams["DirectionLights"].SetValue(_directionLights);
 			_effectsParams["DirectionLightColors"].SetValue(_directionLightColors);
 
@@ -292,10 +292,10 @@ namespace RenderBuddy
 				_pointLightColors[i] = PointLights[i].Color.ToVector3();
 				_pointLightBrightness[i] = PointLights[i].Brightness * Camera.Scale;
 			}
-			//_effectsParams["NumberOfPointLights"].SetValue(PointLights.Count);
-			//_effectsParams["PointLights"].SetValue(_pointLights);
-			//_effectsParams["PointLightColors"].SetValue(_pointLightColors);
-			//_effectsParams["PointLightBrightness"].SetValue(_pointLightBrightness);
+			_effectsParams["NumberOfPointLights"].SetValue(PointLights.Count);
+			_effectsParams["PointLights"].SetValue(_pointLights);
+			_effectsParams["PointLightColors"].SetValue(_pointLightColors);
+			_effectsParams["PointLightBrightness"].SetValue(_pointLightBrightness);
 		}
 
 		public TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
