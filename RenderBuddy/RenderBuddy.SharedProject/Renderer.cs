@@ -303,12 +303,7 @@ namespace RenderBuddy
 			return TextureLoader.LoadImage(this, textureFile, normalMapFile, colorMaskFile);
 		}
 
-		public void SpriteBatchBegin(BlendState blendState, Matrix translation)
-		{
-			SpriteBatchBegin(SpriteSortMode.Immediate, blendState, translation);
-		}
-
-		public void SpriteBatchBegin(SpriteSortMode sortmode, BlendState blendState, Matrix translation)
+		public void SpriteBatchBegin(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate)
 		{
 			SpriteBatch.Begin(sortmode,
 				blendState,

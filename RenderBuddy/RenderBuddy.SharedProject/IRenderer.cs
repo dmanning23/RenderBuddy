@@ -53,14 +53,10 @@ namespace RenderBuddy
 
 		void DrawCameraInfo();
 
-		void SpriteBatchBegin(SpriteSortMode sortmode, BlendState blendState, Matrix translation);
-
 		/// <summary>
 		/// called at the start of the draw loop
 		/// </summary>
-		/// <param name="blendState"></param>
-		/// <param name="translation"></param>
-		void SpriteBatchBegin(BlendState blendState, Matrix translation);
+		void SpriteBatchBegin(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate);
 
 		/// <summary>
 		/// called at the end of the draw loop
