@@ -1,14 +1,14 @@
 ﻿{
   "dependencies": {
     "CameraBuddy": "1.0.5",
-    "FilenameBuddy": "1.0.7",
+    "FilenameBuddy": "1.0.9",
     "GameTimer": "1.0.4",
     "MatrixExtensions": "1.0.2",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
     "MonoGame.Framework.WindowsUniversal": "3.5.1.1679",
     "PrimitiveBuddy": "1.0.3",
     "RandomExtensions.dmanning23": "1.0.3",
-    "ResolutionBuddy": "1.0.10",
+    "ResolutionBuddy": "1.0.11",
     "Vector2Extensions": "1.0.8"
   },
   "frameworks": {

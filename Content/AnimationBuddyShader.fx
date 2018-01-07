@@ -73,16 +73,16 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 
 			//Loop through all the directional lights. 
 			[loop]
-			for (uint i = 0; i < 4; i++)
+			for (uint directionLightIndex = 0; directionLightIndex < 4; directionLightIndex++)
 			{
-				if (i >= NumberOfDirectionLights)
+				if (directionLightIndex >= NumberOfDirectionLights)
 				{
 					//This is done in this goofy way because the GLSL transpiler is goofed
 					break;
 				}
 
 				//compute the rotated light direction
-				float3 rotatedLight = DirectionLights[i];
+				float3 rotatedLight = DirectionLights[directionLightIndex];
 				if (Rotation != 0.0)
 				{
 					float cs = cos(-Rotation);
@@ -96,21 +96,21 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 
 				//Compute lighting.
 				float lightAmount = max(dot(normal.xyz, rotatedLight), 0.0);
-				lightColor += (lightAmount * DirectionLightColors[i]);
+				lightColor += (lightAmount * DirectionLightColors[directionLightIndex]);
 			}
 
 			//Loop through all the point lights
 			[loop]
-			for (uint i = 0; i < 32; i++)
+			for (uint pointLightIndex = 0; pointLightIndex < 32; pointLightIndex++)
 			{
-				if (i >= NumberOfPointLights)
+				if (pointLightIndex >= NumberOfPointLights)
 				{
 					//This is done in this goofy way because the GLSL transpiler is goofed
 					break;
 				}
 
 				//Get the vector from the point light to the pixel position
-				float3 rotatedLight = { PointLights[i].x - position.x, -1 * (PointLights[i].y - position.y), PointLights[i].z };
+				float3 rotatedLight = { PointLights[pointLightIndex].x - position.x, -1 * (PointLights[pointLightIndex].y - position.y), PointLights[pointLightIndex].z };
 				rotatedLight = normalize(rotatedLight);
 
 				//compute the rotated light direction
@@ -126,8 +126,8 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 				}
 
 				//Compute lighting.
-				float lightAmount = saturate(dot(normal.xyz, rotatedLight)) * PointLightBrightness[i];
-				lightColor += (lightAmount * PointLightColors[i]);
+				float lightAmount = saturate(dot(normal.xyz, rotatedLight)) * PointLightBrightness[pointLightIndex];
+				lightColor += (lightAmount * PointLightColors[pointLightIndex]);
 
 				//if (lightAmount > 0.0)
 				//{
