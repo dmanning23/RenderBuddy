@@ -2,8 +2,8 @@
 #define VS_SHADERMODEL vs_3_0
 #define PS_SHADERMODEL ps_3_0
 #else
-#define VS_SHADERMODEL vs_4_0
-#define PS_SHADERMODEL ps_4_0
+#define VS_SHADERMODEL vs_4_0_level_9_3
+#define PS_SHADERMODEL ps_4_0_level_9_3
 #endif
 
 // Effect applies normalmapped lighting to a 2D sprite.
@@ -15,14 +15,22 @@ bool HasNormal = false;
 bool FlipHorizontal = false;
 bool HasColorMask = false;
 
-float3 DirectionLights[4];
-float3 DirectionLightColors[4];
-uint NumberOfDirectionLights = 0;
+#define DIRECTIONLIGHTS 5
 
-float3 PointLights[32];
-float3 PointLightColors[32];
-float PointLightBrightness[32];
-uint NumberOfPointLights = 0;
+float3 DirectionLights[DIRECTIONLIGHTS];
+float3 DirectionLightColors[DIRECTIONLIGHTS];
+int NumberOfDirectionLights = 0;
+
+#if OPENGL
+#define POINTLIGHTS 32
+#else
+#define POINTLIGHTS 5
+#endif
+
+float3 PointLights[POINTLIGHTS];
+float3 PointLightColors[POINTLIGHTS];
+float PointLightBrightness[POINTLIGHTS];
+int NumberOfPointLights = 0;
 
 sampler TextureSampler : register(s0);
 sampler NormalSampler : register(s1)
@@ -34,7 +42,7 @@ sampler ColorMaskSampler : register(s2)
 	Texture = (ColorMaskTexture);
 };
 
-float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
+float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0, float2 texCoord : TEXCOORD0) : COLOR0
 {
 	//Look up the texture value
 	float4 tex = tex2D(TextureSampler, texCoord);
@@ -72,15 +80,9 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 			normal = 2.0 * normal - 1.0;
 
 			//Loop through all the directional lights. 
-			[loop]
-			for (uint directionLightIndex = 0; directionLightIndex < 4; directionLightIndex++)
+			[unroll(DIRECTIONLIGHTS)]
+			for (int directionLightIndex = 0; directionLightIndex < NumberOfDirectionLights; directionLightIndex++)
 			{
-				if (directionLightIndex >= NumberOfDirectionLights)
-				{
-					//This is done in this goofy way because the GLSL transpiler is goofed
-					break;
-				}
-
 				//compute the rotated light direction
 				float3 rotatedLight = DirectionLights[directionLightIndex];
 				if (Rotation != 0.0)
@@ -99,18 +101,14 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 				lightColor += (lightAmount * DirectionLightColors[directionLightIndex]);
 			}
 
+#if OPENGL
 			//Loop through all the point lights
-			[loop]
-			for (uint pointLightIndex = 0; pointLightIndex < 32; pointLightIndex++)
+			[unroll(POINTLIGHTS)]
+			for (int pointLightIndex = 0; pointLightIndex < NumberOfPointLights; pointLightIndex++)
 			{
-				if (pointLightIndex >= NumberOfPointLights)
-				{
-					//This is done in this goofy way because the GLSL transpiler is goofed
-					break;
-				}
-
 				//Get the vector from the point light to the pixel position
-				float3 rotatedLight = { PointLights[pointLightIndex].x - position.x, -1 * (PointLights[pointLightIndex].y - position.y), PointLights[pointLightIndex].z };
+				float4 tempPosition = position;
+				float3 rotatedLight = { PointLights[pointLightIndex].x - tempPosition.x, -1 * (PointLights[pointLightIndex].y - tempPosition.y), PointLights[pointLightIndex].z };
 				rotatedLight = normalize(rotatedLight);
 
 				//compute the rotated light direction
@@ -150,6 +148,7 @@ float4 main(float4 position : SV_POSITION, float4 color : COLOR0, float2 texCoor
 				//	lightColor = saturate(lightColor + specular);
 				//}
 			}
+#endif
 
 			texColor.rgb *= lightColor;
 		}
@@ -162,6 +161,6 @@ technique Normalmap
 {
 	pass Pass1
 	{
-		PixelShader = compile PS_SHADERMODEL main();
+		PixelShader = compile PS_SHADERMODEL PixelShaderFunction();
 	}
 }

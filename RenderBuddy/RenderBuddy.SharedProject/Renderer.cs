@@ -78,7 +78,7 @@ namespace RenderBuddy
 
 		public List<DirectionLight> DirectionLights { get; private set; }
 
-		public const int MaxDirectionLights = 4;
+		public const int MaxDirectionLights = 3;
 
 		private Vector3[] _directionLights = new Vector3[MaxDirectionLights];
 		private Vector3[] _directionLightColors = new Vector3[MaxDirectionLights];
@@ -89,7 +89,11 @@ namespace RenderBuddy
 
 		public List<PointLight> PointLights { get; private set; }
 
+#if ANDROID || __IOS__
 		public const int MaxPointLights = 32;
+#else
+		public const int MaxPointLights = 5;
+#endif
 
 		private Vector3[] _pointLights = new Vector3[MaxPointLights];
 		private Vector3[] _pointLightColors = new Vector3[MaxPointLights];
@@ -220,7 +224,7 @@ namespace RenderBuddy
 
 		}
 
-		#endregion
+		#endregion //Initialization
 
 		#region Methods
 
@@ -282,7 +286,7 @@ namespace RenderBuddy
 			_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
 			_effectsParams["DirectionLights"].SetValue(_directionLights);
 			_effectsParams["DirectionLightColors"].SetValue(_directionLightColors);
-
+			
 			//Add the point lights
 			for (var i = 0; i < PointLights.Count; i++)
 			{
@@ -325,6 +329,6 @@ namespace RenderBuddy
 			Primitive.Point(Camera.Origin, Color.Red);
 		}
 
-		#endregion
+		#endregion //Methods
 	}
 }

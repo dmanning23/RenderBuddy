@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
 	<metadata>
 		<id>RenderBuddy</id>
-		<version>1.0.23</version>
+		<version>1.0.27</version>
 		<title>RenderBuddy</title>
 		<authors>dmanning23</authors>
 		<owners>dmanning23</owners>
@@ -56,7 +56,7 @@
 			</group>
 
 			<group targetFramework="net451">
-				<dependency id="MonoGame.Framework.DesktopGL" version="3.5"/>
+				<dependency id="MonoGame.Framework.WindowsDX" version="3.5"/>
 				<dependency id="CameraBuddy" version="1.0"/>
 				<dependency id="FilenameBuddy" version="1.0.2"/>
 				<dependency id="GameTimer" version="1.0"/>
@@ -85,9 +85,9 @@
 		<file src="RenderBuddy.WindowsUniversal\bin\Release\RenderBuddy.WindowsUniversal.pdb" target="lib\uap10.0\RenderBuddy.WindowsUniversal.pdb" />
 		<file src="RenderBuddy.WindowsUniversal\bin\Release\RenderBuddy.WindowsUniversal.dll" target="lib\uap10.0\RenderBuddy.WindowsUniversal.dll" />
 
-		<!--DesktopGL-->
-		<file src="RenderBuddy.DesktopGL\bin\Release\RenderBuddy.DesktopGL.pdb" target="lib\net451\RenderBuddy.DesktopGL.pdb" />
-		<file src="RenderBuddy.DesktopGL\bin\Release\RenderBuddy.DesktopGL.dll" target="lib\net451\RenderBuddy.DesktopGL.dll" />
+		<!--WindowsDX-->
+		<file src="RenderBuddy.WindowsDX\bin\Release\RenderBuddy.WindowsDX.pdb" target="lib\net451\RenderBuddy.WindowsDX.pdb" />
+		<file src="RenderBuddy.WindowsDX\bin\Release\RenderBuddy.WindowsDX.dll" target="lib\net451\RenderBuddy.WindowsDX.dll" />
 
 	</files>
 </package>
