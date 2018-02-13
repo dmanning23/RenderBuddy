@@ -32,14 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CameraBuddy.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CameraBuddy.1.0.6\lib\Xamarin.iOS10\CameraBuddy.iOS.dll</HintPath>
+      <HintPath>..\packages\CameraBuddy.1.0.8\lib\Xamarin.iOS10\CameraBuddy.iOS.dll</HintPath>
     </Reference>
     <Reference Include="FilenameBuddy.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FilenameBuddy.1.0.9\lib\Xamarin.iOS10\FilenameBuddy.iOS.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GameTimer.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GameTimer.1.0.7\lib\Xamarin.iOS10\GameTimer.iOS.dll</HintPath>
+      <HintPath>..\packages\GameTimer.1.0.8\lib\Xamarin.iOS10\GameTimer.iOS.dll</HintPath>
     </Reference>
     <Reference Include="MatrixExtensions.iOS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MatrixExtensions.1.0.3\lib\Xamarin.iOS10\MatrixExtensions.iOS.dll</HintPath>

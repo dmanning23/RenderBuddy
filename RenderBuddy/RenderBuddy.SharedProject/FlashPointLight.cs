@@ -24,7 +24,7 @@ namespace RenderBuddy
 		{
 			get
 			{
-				return base.Brightness * Clock.Lerp();
+				return base.Brightness * Clock.Lerp;
 			}
 			set
 			{
