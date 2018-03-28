@@ -318,6 +318,17 @@ namespace RenderBuddy
 				translation);
 		}
 
+		public void SpriteBatchBeginNoEffect(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate)
+		{
+			SpriteBatch.Begin(sortmode,
+				blendState,
+				null,
+				null,
+				RasterizerState.CullNone,
+				null,
+				translation);
+		}
+
 		public void SpriteBatchEnd()
 		{
 			SpriteBatch.End();

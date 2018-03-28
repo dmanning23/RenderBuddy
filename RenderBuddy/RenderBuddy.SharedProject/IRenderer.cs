@@ -58,6 +58,8 @@ namespace RenderBuddy
 		/// </summary>
 		void SpriteBatchBegin(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate);
 
+		void SpriteBatchBeginNoEffect(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate);
+
 		/// <summary>
 		/// called at the end of the draw loop
 		/// </summary>

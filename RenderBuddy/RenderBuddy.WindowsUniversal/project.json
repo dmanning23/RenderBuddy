@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
-    "CameraBuddy": "1.0.9",
-    "FilenameBuddy": "1.0.11",
+    "CameraBuddy": "1.0.10",
+    "FilenameBuddy": "1.0.12",
     "GameTimer": "1.0.8",
     "MatrixExtensions": "1.0.3",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
