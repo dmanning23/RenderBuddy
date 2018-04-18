@@ -29,7 +29,7 @@ namespace RenderBuddy
 		/// <summary>
 		/// Shader to draw the texture, light correctly using the supplied normal map
 		/// </summary>
-		private Effect _animationEffect;
+		public Effect AnimationEffect { get; private set; }
 
 		private EffectParameterCollection _effectsParams;
 
@@ -155,8 +155,8 @@ namespace RenderBuddy
 			myBlendState.ColorDestinationBlend = Blend.InverseSourceAlpha;
 			Graphics.BlendState = myBlendState;
 
-			_animationEffect = Content.Load<Effect>(@"AnimationBuddyShader");
-			_effectsParams = _animationEffect.Parameters;
+			AnimationEffect = Content.Load<Effect>(@"AnimationBuddyShader");
+			_effectsParams = AnimationEffect.Parameters;
 			_effectsParams["AmbientColor"].SetValue(AmbientColor.ToVector3());
 
 			Primitive = new Primitive(graphics, SpriteBatch);
@@ -314,7 +314,7 @@ namespace RenderBuddy
 				null,
 				null,
 				RasterizerState.CullNone,
-				_animationEffect,
+				AnimationEffect,
 				translation);
 		}
 

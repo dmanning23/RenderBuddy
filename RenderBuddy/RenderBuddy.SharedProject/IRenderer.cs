@@ -12,6 +12,8 @@ namespace RenderBuddy
 	{
 		#region Properties
 
+		Effect AnimationEffect { get; }
+
 		SpriteBatch SpriteBatch { get; }
 
 		GraphicsDevice Graphics { get; set; }
