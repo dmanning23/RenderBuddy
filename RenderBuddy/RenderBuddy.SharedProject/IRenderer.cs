@@ -45,9 +45,9 @@ namespace RenderBuddy
 
 		void AddPointLight(Vector3 position, float brightness, Color color);
 
-		void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale);
+		void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale, float layer);
 
-		void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped);
+		void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float layer);
 
 		void LoadContent(GraphicsDevice graphics);
 

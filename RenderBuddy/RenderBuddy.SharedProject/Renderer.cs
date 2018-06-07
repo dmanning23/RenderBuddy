@@ -228,7 +228,7 @@ namespace RenderBuddy
 
 		#region Methods
 
-		public void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale)
+		public void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale, float layer)
 		{
 			var tex = image as TextureInfo;
 			SetEffectParams(tex, secondaryColor, rotation, isFlipped);
@@ -242,10 +242,10 @@ namespace RenderBuddy
 				Vector2.Zero,
 				scale,
 				(isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None),
-				0.0f);
+				layer);
 		}
 
-		public void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped)
+		public void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float layer)
 		{
 			SetEffectParams(image, secondaryColor, rotation, isFlipped);
 
@@ -257,7 +257,7 @@ namespace RenderBuddy
 				rotation,
 				Vector2.Zero,
 				(isFlipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None),
-				0.0f);
+				layer);
 		}
 
 		/// <summary>
