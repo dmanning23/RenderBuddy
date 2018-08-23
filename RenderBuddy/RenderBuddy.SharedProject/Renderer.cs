@@ -92,7 +92,7 @@ namespace RenderBuddy
 #if ANDROID || __IOS__
 		public const int MaxPointLights = 32;
 #else
-		public const int MaxPointLights = 5;
+		public const int MaxPointLights = 4;
 #endif
 
 		private Vector3[] _pointLights = new Vector3[MaxPointLights];

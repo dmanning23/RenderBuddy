@@ -2,8 +2,8 @@
 #define VS_SHADERMODEL vs_3_0
 #define PS_SHADERMODEL ps_3_0
 #else
-#define VS_SHADERMODEL vs_4_0_level_9_3
-#define PS_SHADERMODEL ps_4_0_level_9_3
+#define VS_SHADERMODEL vs_4_0
+#define PS_SHADERMODEL ps_4_0
 #endif
 
 // Effect applies normalmapped lighting to a 2D sprite.
@@ -24,7 +24,7 @@ int NumberOfDirectionLights = 0;
 #if OPENGL
 #define POINTLIGHTS 32
 #else
-#define POINTLIGHTS 5
+#define POINTLIGHTS 4
 #endif
 
 float3 PointLights[POINTLIGHTS];
@@ -101,7 +101,6 @@ float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0,
 				lightColor += (lightAmount * DirectionLightColors[directionLightIndex]);
 			}
 
-#if OPENGL
 			//Loop through all the point lights
 			[unroll(POINTLIGHTS)]
 			for (int pointLightIndex = 0; pointLightIndex < NumberOfPointLights; pointLightIndex++)
@@ -148,7 +147,6 @@ float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0,
 				//	lightColor = saturate(lightColor + specular);
 				//}
 			}
-#endif
 
 			texColor.rgb *= lightColor;
 		}
