@@ -48,7 +48,6 @@ namespace RenderBuddy
 			Clock.Update(clock);
 		}
 
-		#endregion //Methods
-
+		#endregion //Method
 	}
 }
