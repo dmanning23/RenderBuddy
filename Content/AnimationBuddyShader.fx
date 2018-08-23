@@ -106,8 +106,7 @@ float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0,
 			for (int pointLightIndex = 0; pointLightIndex < NumberOfPointLights; pointLightIndex++)
 			{
 				//Get the vector from the point light to the pixel position
-				float4 tempPosition = position;
-				float3 rotatedLight = { PointLights[pointLightIndex].x - tempPosition.x, -1 * (PointLights[pointLightIndex].y - tempPosition.y), PointLights[pointLightIndex].z };
+				float3 rotatedLight = { PointLights[pointLightIndex].x - position.x, -1 * (position.y - PointLights[pointLightIndex].y), PointLights[pointLightIndex].z };
 				rotatedLight = normalize(rotatedLight);
 
 				//compute the rotated light direction
@@ -121,9 +120,13 @@ float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0,
 					rotatedLight.x = px;
 					rotatedLight.y = py;
 				}
+				
+				//Get the light attenuation
+				float2 lengthVect = { PointLights[pointLightIndex].x - position.x, PointLights[pointLightIndex].y - position.y };
+				float attenuation = 1 / pow(((length(lengthVect) / PointLightBrightness[pointLightIndex]) + 1), 2);
 
 				//Compute lighting.
-				float lightAmount = saturate(dot(normal.xyz, rotatedLight)) * PointLightBrightness[pointLightIndex];
+				float lightAmount = saturate(dot(normal.xyz, rotatedLight)) * (PointLightBrightness[pointLightIndex] * attenuation);
 				lightColor += (lightAmount * PointLightColors[pointLightIndex]);
 
 				//if (lightAmount > 0.0)

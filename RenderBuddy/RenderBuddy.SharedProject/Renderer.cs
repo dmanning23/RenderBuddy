@@ -291,7 +291,6 @@ namespace RenderBuddy
 			for (var i = 0; i < PointLights.Count; i++)
 			{
 				var pos = MatrixExt.Multiply(Camera.TranslationMatrix, new Vector2(PointLights[i].Position.X, PointLights[i].Position.Y));
-				pos.Y = Resolution.ScreenArea.Bottom - pos.Y;
 				_pointLights[i] = new Vector3(pos.X, pos.Y, PointLights[i].Position.Z);
 				_pointLightColors[i] = PointLights[i].Color.ToVector3();
 				_pointLightBrightness[i] = PointLights[i].Brightness * Camera.Scale;
