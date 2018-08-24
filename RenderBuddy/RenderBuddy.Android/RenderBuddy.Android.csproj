@@ -66,7 +66,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="Vector2Extensions.Android, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vector2Extensions.1.0.11\lib\MonoAndroid10\Vector2Extensions.Android.dll</HintPath>
+      <HintPath>..\packages\Vector2Extensions.1.0.12\lib\MonoAndroid10\Vector2Extensions.Android.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

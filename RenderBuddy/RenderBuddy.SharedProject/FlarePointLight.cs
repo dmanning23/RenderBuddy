@@ -56,7 +56,7 @@ namespace RenderBuddy
 		{
 			get
 			{
-				return !TotalClock.HasTimeRemaining || CurrentState == FlareState.Dead;
+				return CurrentState == FlareState.Dead || (!TotalClock.Paused && !TotalClock.HasTimeRemaining);
 			}
 		}
 
@@ -134,7 +134,14 @@ namespace RenderBuddy
 
 			//Setup the total lifetime clock
 			TotalClock = new CountdownTimer();
-			TotalClock.Start(AttackTimeDelta + SustainTimeDelta + DelayTimeDelta);
+			if (SustainTimeDelta >= 0)
+			{
+				TotalClock.Start(AttackTimeDelta + SustainTimeDelta + DelayTimeDelta);
+			}
+			else
+			{
+				TotalClock.Paused = true;
+			}
 
 			UpdateFlareBrightness();
 		}
@@ -169,14 +176,23 @@ namespace RenderBuddy
 				UpdateFlareBrightness();
 			}
 
-			if (!StateClock.HasTimeRemaining)
+			if (!StateClock.Paused && !StateClock.HasTimeRemaining)
 			{
 				switch (CurrentState)
 				{
 					case FlareState.Attack:
 						{
 							CurrentState = FlareState.Sustain;
-							StateClock.Start(SustainTimeDelta);
+
+							if (SustainTimeDelta >= 0)
+							{
+								StateClock.Start(SustainTimeDelta);
+							}
+							else
+							{
+								TotalClock.Paused = true;
+								StateClock.Paused = true;
+							}
 						}
 						break;
 					case FlareState.Sustain:
