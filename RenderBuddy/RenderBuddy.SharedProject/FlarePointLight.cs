@@ -90,6 +90,12 @@ namespace RenderBuddy
 			}
 		}
 
+		/// <summary>
+		/// A callback method to get the position of this emitter.
+		/// null to figure out our own dang position
+		/// </summary>
+		private readonly Position3Delegate _positionDelegate;
+
 		#endregion //Properties
 
 		#region Methods
@@ -101,8 +107,15 @@ namespace RenderBuddy
 			float sustainTimeDelta,
 			float delayTimeDelta, 
 			float minFlare, 
-			float maxFlare) : base(position, 0f, color)
+			float maxFlare,
+			Position3Delegate positionDelegate = null) : base(position, 0f, color)
 		{
+			_positionDelegate = positionDelegate;
+			if (null != _positionDelegate)
+			{
+				Position = _positionDelegate();
+			}
+
 			//setup the flare option
 			_rand = new Random();
 			MinBrightness = minFlare;
@@ -138,6 +151,12 @@ namespace RenderBuddy
 			TotalClock.Update(clock);
 			StateClock.Update(clock);
 			FlareClock.Update(clock);
+
+			//update position from attached bone?
+			if (null != _positionDelegate)
+			{
+				Position = _positionDelegate();
+			}
 
 			UpdateBrightness();
 		}

@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IRenderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ITextureLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PointLight.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Position3Delegate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Renderer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextureContentLoader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TextureFileLoader.cs" />
