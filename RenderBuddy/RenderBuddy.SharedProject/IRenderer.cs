@@ -1,5 +1,6 @@
 using CameraBuddy;
 using FilenameBuddy;
+using GameTimer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -44,6 +45,10 @@ namespace RenderBuddy
 		void AddDirectionalLight(Vector3 direction, Color color);
 
 		void AddPointLight(Vector3 position, float brightness, Color color);
+
+		void Update(GameTime gameTime);
+
+		void Update(GameClock gameTime);
 
 		void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale, float layer);
 

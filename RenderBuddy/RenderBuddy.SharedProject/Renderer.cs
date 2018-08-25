@@ -162,6 +162,10 @@ namespace RenderBuddy
 			Primitive = new Primitive(graphics, SpriteBatch);
 		}
 
+		#endregion //Initialization
+
+		#region Methods
+
 		public void ClearLights()
 		{
 			DirectionLights.Clear();
@@ -192,7 +196,17 @@ namespace RenderBuddy
 		public void Update(GameTime gameTime)
 		{
 			Clock.Update(gameTime);
+			UpdateLights();
+		}
 
+		public void Update(GameClock gameTime)
+		{
+			Clock.Update(gameTime);
+			UpdateLights();
+		}
+
+		private void UpdateLights()
+		{
 			//clean up any expired lights
 			int i = 0;
 			while (i < DirectionLights.Count)
@@ -221,12 +235,7 @@ namespace RenderBuddy
 					i++;
 				}
 			}
-
 		}
-
-		#endregion //Initialization
-
-		#region Methods
 
 		public void Draw(TextureInfo image, Vector2 position, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float scale, float layer)
 		{
