@@ -56,6 +56,8 @@ namespace RenderBuddy
 
 		public GameClock Clock { get; set; }
 
+		private Matrix _matrix;
+
 		#region Ambient Light
 
 		private Color _ambientColor;
@@ -299,7 +301,7 @@ namespace RenderBuddy
 			//Add the point lights
 			for (var i = 0; i < PointLights.Count; i++)
 			{
-				var pos = MatrixExt.Multiply(Camera.TranslationMatrix, new Vector2(PointLights[i].Position.X, PointLights[i].Position.Y));
+				var pos = MatrixExt.Multiply(_matrix, new Vector2(PointLights[i].Position.X, PointLights[i].Position.Y));
 				_pointLights[i] = new Vector3(pos.X, pos.Y, PointLights[i].Position.Z);
 				_pointLightColors[i] = PointLights[i].Color.ToVector3();
 				_pointLightBrightness[i] = PointLights[i].Brightness * Camera.Scale;
@@ -317,6 +319,8 @@ namespace RenderBuddy
 
 		public void SpriteBatchBegin(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate)
 		{
+			_matrix = translation;
+
 			SpriteBatch.Begin(sortmode,
 				blendState,
 				null,
@@ -328,6 +332,8 @@ namespace RenderBuddy
 
 		public void SpriteBatchBeginNoEffect(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate)
 		{
+			_matrix = translation;
+
 			SpriteBatch.Begin(sortmode,
 				blendState,
 				null,
