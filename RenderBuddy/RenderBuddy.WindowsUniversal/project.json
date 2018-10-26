@@ -1,15 +1,15 @@
 ﻿{
   "dependencies": {
-    "CameraBuddy": "1.0.10",
-    "FilenameBuddy": "1.0.12",
-    "GameTimer": "1.0.8",
-    "MatrixExtensions": "1.0.3",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8",
-    "MonoGame.Framework.WindowsUniversal": "3.6.0.1625",
-    "PrimitiveBuddy": "1.0.4",
-    "RandomExtensions.dmanning23": "1.0.6",
-    "ResolutionBuddy": "1.0.17",
-    "Vector2Extensions": "1.0.12"
+    "CameraBuddy": "2.0.0",
+    "FilenameBuddy": "2.0.0",
+    "GameTimer": "2.0.0",
+    "MatrixExtensions": "2.0.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.1.9",
+    "MonoGame.Framework.WindowsUniversal": "3.7.0.1708",
+    "PrimitiveBuddy": "2.0.0",
+    "RandomExtensions.dmanning23": "2.0.0",
+    "ResolutionBuddy": "2.0.1",
+    "Vector2Extensions": "2.0.0"
   },
   "frameworks": {
     "uap10.0.10586": {}
