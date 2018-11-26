@@ -50,109 +50,104 @@ float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0,
 	//the final color we are going to use, either primary or secondary
 	float4 texColor = color;
 
-	//Dont do these calculations if the alpha channel is empty
-	if (tex.a > 0.0)
+	//If there is a palette swap, add it to the texture color
+	if (HasColorMask == true)
 	{
-		//If there is a palette swap, add it to the texture color
-		if (HasColorMask == true)
+		//Get the color from the palette swap texture
+		float4 paletteSwap = tex2D(ColorMaskSampler, texCoord);
+		if (FlipHorizontal == true)
 		{
-			//Get the color from the palette swap texture
-			float4 paletteSwap = tex2D(ColorMaskSampler, texCoord);
-			if (paletteSwap.a > 0.0)
-			{
-				texColor = (texColor * (1.0 - paletteSwap.a)) + (paletteSwap * ColorMask);
-			}
+			//If we are drawing a flipped image, reverse the paletteSwap
+			paletteSwap.x = 1 - paletteSwap.x;
+		}
+		if (paletteSwap.a > 0.0)
+		{
+			texColor = (texColor * (1.0 - paletteSwap.a)) + (paletteSwap * ColorMask);
+		}
+	}
+
+	//Dont do these calculations if there is no normal map
+	if (HasNormal == true)
+	{
+		//the final light value that will be added to the texture color. Don't allow light level to go below the ambient light level
+		float3 lightColor = AmbientColor;
+
+		//Look up the normalmap value
+		float4 normal = tex2D(NormalSampler, texCoord);
+		if (FlipHorizontal == true)
+		{
+			//If we are drawing a flipped image, reverse the normal
+			normal.x = 1 - normal.x;
+		}
+		normal = 2.0 * normal - 1.0;
+
+		//Loop through all the directional lights. 
+		[unroll(DIRECTIONLIGHTS)]
+		for (int directionLightIndex = 0; directionLightIndex < NumberOfDirectionLights; directionLightIndex++)
+		{
+			//compute the rotated light direction
+			float3 rotatedLight = DirectionLights[directionLightIndex];
+			float cs = cos(-Rotation);
+			float sn = sin(-Rotation);
+
+			float px = rotatedLight.x * cs - rotatedLight.y * sn;
+			float py = rotatedLight.x * sn + rotatedLight.y * cs;
+			rotatedLight.x = px;
+			rotatedLight.y = py;
+
+			//Compute lighting.
+			float lightAmount = max(dot(normal.xyz, rotatedLight), 0.0);
+			lightColor += (lightAmount * DirectionLightColors[directionLightIndex]);
 		}
 
-		//Dont do these calculations if there is no normal map
-		if (HasNormal == true)
+		//Loop through all the point lights
+		[unroll(POINTLIGHTS)]
+		for (int pointLightIndex = 0; pointLightIndex < NumberOfPointLights; pointLightIndex++)
 		{
-			//the final light value that will be added to the texture color. Don't allow light level to go below the ambient light level
-			float3 lightColor = AmbientColor;
+			//Get the vector from the point light to the pixel position
+			float3 rotatedLight = { PointLights[pointLightIndex].x - position.x, -1 * (position.y - PointLights[pointLightIndex].y), PointLights[pointLightIndex].z };
+			rotatedLight = normalize(rotatedLight);
 
-			//Look up the normalmap value
-			float4 normal = tex2D(NormalSampler, texCoord);
-			if (FlipHorizontal == true)
-			{
-				//If we are drawing a flipped image, reverse the normal
-				normal.x = 1 - normal.x;
-			}
-			normal = 2.0 * normal - 1.0;
+			//compute the rotated light direction
+			float cs = cos(-Rotation);
+			float sn = sin(-Rotation);
 
-			//Loop through all the directional lights. 
-			[unroll(DIRECTIONLIGHTS)]
-			for (int directionLightIndex = 0; directionLightIndex < NumberOfDirectionLights; directionLightIndex++)
-			{
-				//compute the rotated light direction
-				float3 rotatedLight = DirectionLights[directionLightIndex];
-				if (Rotation != 0.0)
-				{
-					float cs = cos(-Rotation);
-					float sn = sin(-Rotation);
+			float px = rotatedLight.x * cs - rotatedLight.y * sn;
+			float py = rotatedLight.x * sn + rotatedLight.y * cs;
+			rotatedLight.x = px;
+			rotatedLight.y = py;
+			
+			//Get the light attenuation
+			float2 lengthVect = { PointLights[pointLightIndex].x - position.x, PointLights[pointLightIndex].y - position.y };
+			float attenuation = 1 / pow(((length(lengthVect) / PointLightBrightness[pointLightIndex]) + 1), 2);
 
-					float px = rotatedLight.x * cs - rotatedLight.y * sn;
-					float py = rotatedLight.x * sn + rotatedLight.y * cs;
-					rotatedLight.x = px;
-					rotatedLight.y = py;
-				}
+			//Compute lighting.
+			float lightAmount = saturate(dot(normal.xyz, rotatedLight)) * (PointLightBrightness[pointLightIndex] * attenuation);
+			lightColor += (lightAmount * PointLightColors[pointLightIndex]);
 
-				//Compute lighting.
-				float lightAmount = max(dot(normal.xyz, rotatedLight), 0.0);
-				lightColor += (lightAmount * DirectionLightColors[directionLightIndex]);
-			}
+			//if (lightAmount > 0.0)
+			//{
 
-			//Loop through all the point lights
-			[unroll(POINTLIGHTS)]
-			for (int pointLightIndex = 0; pointLightIndex < NumberOfPointLights; pointLightIndex++)
-			{
-				//Get the vector from the point light to the pixel position
-				float3 rotatedLight = { PointLights[pointLightIndex].x - position.x, -1 * (position.y - PointLights[pointLightIndex].y), PointLights[pointLightIndex].z };
-				rotatedLight = normalize(rotatedLight);
+			//	// Sample the pixel from the specular map texture.
+			//	float specularIntensity = 1;
 
-				//compute the rotated light direction
-				if (Rotation != 0.0)
-				{
-					float cs = cos(-Rotation);
-					float sn = sin(-Rotation);
+			//	// Calculate the reflection vector based on the light intensity, normal vector, and light direction.
+			//	float3 reflection = normalize(2 * lightAmount * normal - rotatedLight);
 
-					float px = rotatedLight.x * cs - rotatedLight.y * sn;
-					float py = rotatedLight.x * sn + rotatedLight.y * cs;
-					rotatedLight.x = px;
-					rotatedLight.y = py;
-				}
-				
-				//Get the light attenuation
-				float2 lengthVect = { PointLights[pointLightIndex].x - position.x, PointLights[pointLightIndex].y - position.y };
-				float attenuation = 1 / pow(((length(lengthVect) / PointLightBrightness[pointLightIndex]) + 1), 2);
+			//	// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
+			//	float3 viewDirection = { 0,0,-1 };
+			//	float specularPower = 16;
+			//	float4 specular = pow(saturate(dot(reflection, viewDirection)), specularPower);
 
-				//Compute lighting.
-				float lightAmount = saturate(dot(normal.xyz, rotatedLight)) * (PointLightBrightness[pointLightIndex] * attenuation);
-				lightColor += (lightAmount * PointLightColors[pointLightIndex]);
+			//	// Use the specular map to determine the intensity of specular light at this pixel.
+			//	specular = specular * specularIntensity;
 
-				//if (lightAmount > 0.0)
-				//{
-
-				//	// Sample the pixel from the specular map texture.
-				//	float specularIntensity = 1;
-
-				//	// Calculate the reflection vector based on the light intensity, normal vector, and light direction.
-				//	float3 reflection = normalize(2 * lightAmount * normal - rotatedLight);
-
-				//	// Determine the amount of specular light based on the reflection vector, viewing direction, and specular power.
-				//	float3 viewDirection = { 0,0,-1 };
-				//	float specularPower = 16;
-				//	float4 specular = pow(saturate(dot(reflection, viewDirection)), specularPower);
-
-				//	// Use the specular map to determine the intensity of specular light at this pixel.
-				//	specular = specular * specularIntensity;
-
-				//	// Add the specular component last to the output color.
-				//	lightColor = saturate(lightColor + specular);
-				//}
-			}
-
-			texColor.rgb *= lightColor;
+			//	// Add the specular component last to the output color.
+			//	lightColor = saturate(lightColor + specular);
+			//}
 		}
+
+		texColor.rgb *= lightColor;
 	}
 
 	return tex * texColor;
