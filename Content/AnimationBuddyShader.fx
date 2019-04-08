@@ -55,11 +55,6 @@ float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0,
 	{
 		//Get the color from the palette swap texture
 		float4 paletteSwap = tex2D(ColorMaskSampler, texCoord);
-		if (FlipHorizontal == true)
-		{
-			//If we are drawing a flipped image, reverse the paletteSwap
-			paletteSwap.x = 1 - paletteSwap.x;
-		}
 		if (paletteSwap.a > 0.0)
 		{
 			texColor = (texColor * (1.0 - paletteSwap.a)) + (paletteSwap * ColorMask);
