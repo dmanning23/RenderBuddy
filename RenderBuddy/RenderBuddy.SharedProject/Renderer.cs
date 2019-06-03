@@ -41,7 +41,7 @@ namespace RenderBuddy
 		/// <summary>
 		/// The camera we are going to use!
 		/// </summary>
-		public Camera Camera { get; protected set; }
+		public ICamera Camera { get; protected set; }
 
 		/// <summary>
 		/// thing for rendering primitives.
@@ -351,7 +351,7 @@ namespace RenderBuddy
 		public void DrawCameraInfo()
 		{
 			//draw the center point
-			Primitive.Point(Camera.Origin, Color.Red);
+			Primitive.Point(Camera.Center, Color.Red);
 		}
 
 		#endregion //Methods

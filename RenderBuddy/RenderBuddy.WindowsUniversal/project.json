@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "CameraBuddy": "2.0.0",
+    "CameraBuddy": "2.0.4",
     "FilenameBuddy": "2.0.5",
     "GameTimer": "2.0.0",
     "MatrixExtensions": "2.0.0",

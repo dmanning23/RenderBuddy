@@ -28,7 +28,7 @@ namespace RenderBuddy
 
 		Primitive Primitive { get; }
 
-		Camera Camera { get; }
+		ICamera Camera { get; }
 
 		Color AmbientColor { get; set; }
 
