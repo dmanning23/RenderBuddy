@@ -18,7 +18,7 @@ bool HasColorMask = false;
 #define DIRECTIONLIGHTS 5
 
 float3 DirectionLights[DIRECTIONLIGHTS];
-float3 DirectionLightColors[DIRECTIONLIGHTS];
+float4 DirectionLightColors[DIRECTIONLIGHTS];
 int NumberOfDirectionLights = 0;
 
 #if OPENGL
@@ -92,7 +92,7 @@ float4 PixelShaderFunction(float4 position : SV_Position, float4 color : COLOR0,
 
 			//Compute lighting.
 			float lightAmount = max(dot(normal.xyz, rotatedLight), 0.0);
-			lightColor += (lightAmount * DirectionLightColors[directionLightIndex]);
+			lightColor += (lightAmount * (DirectionLightColors[directionLightIndex].xyz * DirectionLightColors[directionLightIndex].w));
 		}
 
 		//Loop through all the point lights

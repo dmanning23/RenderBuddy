@@ -83,7 +83,7 @@ namespace RenderBuddy
 		public const int MaxDirectionLights = 3;
 
 		private Vector3[] _directionLights = new Vector3[MaxDirectionLights];
-		private Vector3[] _directionLightColors = new Vector3[MaxDirectionLights];
+		private Vector4[] _directionLightColors = new Vector4[MaxDirectionLights];
 
 		#endregion //Direction Lights
 
@@ -292,7 +292,7 @@ namespace RenderBuddy
 			for (var i = 0; i < DirectionLights.Count; i++)
 			{
 				_directionLights[i] = DirectionLights[i].Direction;
-				_directionLightColors[i] = DirectionLights[i].Color.ToVector3();
+				_directionLightColors[i] = DirectionLights[i].Color.ToVector4();
 			}
 			_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
 			_effectsParams["DirectionLights"].SetValue(_directionLights);
