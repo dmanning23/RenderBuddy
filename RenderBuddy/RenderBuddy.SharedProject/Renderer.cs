@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PrimitiveBuddy;
 using ResolutionBuddy;
+using System;
 using System.Collections.Generic;
 
 namespace RenderBuddy
@@ -314,7 +315,14 @@ namespace RenderBuddy
 
 		public TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null)
 		{
-			return TextureLoader.LoadImage(this, textureFile, normalMapFile, colorMaskFile);
+			try
+			{
+				return TextureLoader.LoadImage(this, textureFile, normalMapFile, colorMaskFile);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception($"There was an error in {textureFile.GetRelFilename()}", ex);
+			}
 		}
 
 		public void SpriteBatchBegin(BlendState blendState, Matrix translation, SpriteSortMode sortmode = SpriteSortMode.Immediate)
