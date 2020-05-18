@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace RenderBuddy
 {
-	public class Renderer : IRenderer 
+	public class Renderer : IRenderer
 	{
 		#region Properties
 
@@ -165,6 +165,20 @@ namespace RenderBuddy
 			Primitive = new Primitive(graphics, SpriteBatch);
 		}
 
+		public void UnloadContent()
+		{
+			SpriteBatch?.Dispose();
+			SpriteBatch = null;
+
+			Primitive?.Dispose();
+			Primitive = null;
+		}
+
+		public void Dispose()
+		{
+			UnloadContent();
+		}
+
 		#endregion //Initialization
 
 		#region Methods
@@ -298,7 +312,7 @@ namespace RenderBuddy
 			_effectsParams["NumberOfDirectionLights"].SetValue(DirectionLights.Count);
 			_effectsParams["DirectionLights"].SetValue(_directionLights);
 			_effectsParams["DirectionLightColors"].SetValue(_directionLightColors);
-			
+
 			//Add the point lights
 			for (var i = 0; i < PointLights.Count; i++)
 			{

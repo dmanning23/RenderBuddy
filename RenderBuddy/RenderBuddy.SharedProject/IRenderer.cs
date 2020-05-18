@@ -5,11 +5,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PrimitiveBuddy;
+using System;
 using System.Collections.Generic;
 
 namespace RenderBuddy
 {
-	public interface IRenderer
+	public interface IRenderer : IDisposable
 	{
 		#region Properties
 
@@ -55,6 +56,8 @@ namespace RenderBuddy
 		void Draw(TextureInfo image, Rectangle destination, Color primaryColor, Color secondaryColor, float rotation, bool isFlipped, float layer);
 
 		void LoadContent(GraphicsDevice graphics);
+
+		void UnloadContent();
 
 		TextureInfo LoadImage(Filename textureFile, Filename normalMapFile = null, Filename colorMaskFile = null);
 
