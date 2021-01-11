@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2024
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderBuddy.Android", "RenderBuddy.Android\RenderBuddy.Android.csproj", "{2DC89B77-ACE6-4FA2-8846-0F5F98303414}"
 EndProject
@@ -18,14 +18,11 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "RenderBuddy.SharedProject",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderBuddy.WindowsDX", "RenderBuddy.WindowsDX\RenderBuddy.WindowsDX.csproj", "{04BD06F4-7196-4178-A97F-88EED98BA4DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenderBuddy.WindowsUniversal", "RenderBuddy.WindowsUniversal\RenderBuddy.WindowsUniversal.csproj", "{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{04bd06f4-7196-4178-a97f-88eed98ba4da}*SharedItemsImports = 4
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{2dc89b77-ace6-4fa2-8846-0f5f98303414}*SharedItemsImports = 4
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{3dc38273-ed5b-4385-ae85-79d7f1b39541}*SharedItemsImports = 4
-		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{3ff4694e-b0cc-42f3-852f-fbe10ae8e09f}*SharedItemsImports = 4
 		RenderBuddy.SharedProject\RenderBuddy.SharedProject.projitems*{43cdb02f-8df5-4059-8056-12c04386df1e}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,30 +112,6 @@ Global
 		{04BD06F4-7196-4178-A97F-88EED98BA4DA}.Release|x64.Build.0 = Release|Any CPU
 		{04BD06F4-7196-4178-A97F-88EED98BA4DA}.Release|x86.ActiveCfg = Release|Any CPU
 		{04BD06F4-7196-4178-A97F-88EED98BA4DA}.Release|x86.Build.0 = Release|Any CPU
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|Any CPU.Build.0 = Release|Any CPU
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|ARM.ActiveCfg = Release|ARM
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|ARM.Build.0 = Release|ARM
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|x64.ActiveCfg = Release|x64
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|x64.Build.0 = Release|x64
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|x86.ActiveCfg = Release|x86
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.AppStore|x86.Build.0 = Release|x86
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|ARM.ActiveCfg = Debug|ARM
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|ARM.Build.0 = Debug|ARM
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|x64.ActiveCfg = Debug|x64
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|x64.Build.0 = Debug|x64
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|x86.ActiveCfg = Debug|x86
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Debug|x86.Build.0 = Debug|x86
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|ARM.ActiveCfg = Release|ARM
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|ARM.Build.0 = Release|ARM
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|x64.ActiveCfg = Release|x64
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|x64.Build.0 = Release|x64
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|x86.ActiveCfg = Release|x86
-		{3FF4694E-B0CC-42F3-852F-FBE10AE8E09F}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

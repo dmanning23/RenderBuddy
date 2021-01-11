@@ -43,9 +43,9 @@ namespace RenderBuddy
 
 		void ClearLights();
 
-		void AddDirectionalLight(Vector3 direction, Color color);
+		DirectionLight AddDirectionalLight(Vector3 direction, Color color);
 
-		void AddPointLight(Vector3 position, float brightness, Color color);
+		PointLight AddPointLight(Vector3 position, float brightness, Color color);
 
 		void Update(GameTime gameTime);
 

@@ -189,12 +189,15 @@ namespace RenderBuddy
 			PointLights.Clear();
 		}
 
-		public void AddDirectionalLight(Vector3 direction, Color color)
+		public DirectionLight AddDirectionalLight(Vector3 direction, Color color)
 		{
 			if (DirectionLights.Count < MaxDirectionLights)
 			{
-				DirectionLights.Add(new DirectionLight(direction, color));
+				var light = new DirectionLight(direction, color);
+				DirectionLights.Add(light);
+				return light;
 			}
+			return null;
 		}
 
 		public void AddPointLight(PointLight pointLight)
@@ -205,9 +208,11 @@ namespace RenderBuddy
 			}
 		}
 
-		public void AddPointLight(Vector3 position, float brightness, Color color)
+		public PointLight AddPointLight(Vector3 position, float brightness, Color color)
 		{
-			AddPointLight(new PointLight(position, brightness, color));
+			var light = new PointLight(position, brightness, color);
+			AddPointLight(light);
+			return light;
 		}
 
 		public void Update(GameTime gameTime)
