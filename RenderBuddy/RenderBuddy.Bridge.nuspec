@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+	<metadata>
+		<id>RenderBuddy.Bridge</id>
+		<version>2.0.12</version>
+		<title>RenderBuddy.Bridge</title>
+		<authors>dmanning23</authors>
+		<owners>dmanning23</owners>
+		<projectUrl>https://github.com/dmanning23/RenderBuddy</projectUrl>
+		<licenseUrl>https://github.com/dmanning23/RenderBuddy/blob/master/LICENSE.txt</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>MonoGame.Bridge library to simplify drawing normal-mapped images</description>
+		<releaseNotes />
+		<copyright>Copyright 2016</copyright>
+		<tags>android, ios, windows universal, monogame, xamarin</tags>
+		<dependencies>
+
+			<group targetFramework="net47">
+				<dependency id="MonoGame.Framework.Bridge" version="3.7"/>
+				<dependency id="CameraBuddy.Bridge" version="2.0"/>
+				<dependency id="FilenameBuddy.Bridge" version="2.0"/>
+				<dependency id="GameTimer.Bridge" version="2.0"/>
+				<dependency id="MatrixExtensions.Bridge" version="2.0"/>
+				<dependency id="PrimitiveBuddy.Bridge" version="2.0"/>
+				<dependency id="RandomExtensions.Bridge.dmanning23" version="2.0"/>
+				<dependency id="ResolutionBuddy.Bridge" version="2.0"/>
+				<dependency id="Vector2Extensions.Bridge" version="2.0"/>
+			</group>
+
+		</dependencies>
+	</metadata>
+	<files>
+
+		<file src="..\Content\AnimationBuddyShader.fx" target="content\Content\AnimationBuddyShader.fx" />
+
+		<file src="RenderBuddy.Bridge\bin\Release\RenderBuddy.Bridge.pdb" target="lib\net47\RenderBuddy.Bridge.pdb" />
+		<file src="RenderBuddy.Bridge\bin\Release\RenderBuddy.Bridge.dll" target="lib\net47\RenderBuddy.Bridge.dll" />
+
+	</files>
+</package>
