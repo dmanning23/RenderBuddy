@@ -216,7 +216,7 @@ float canvas   = (hStrands * vStrands) * 0.5 + 0.5;  // remap to [0, 1]
 color.rgb *= lerp(1.0, canvas, CanvasStrength);
 ```
 
-The frequency constant `800.0` targets a canvas-weave period of roughly 1–2 pixels at 1080p — adjust if needed for different resolutions. This can be exposed as a parameter in a future revision.
+The frequency constant `800.0` targets a canvas-weave period of roughly 1–2 pixels at 1080p, which is the target resolution for this library.
 
 #### Technique
 
